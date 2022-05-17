@@ -1,6 +1,7 @@
 package source;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
     public Login() {
@@ -17,10 +18,10 @@ public class Login extends javax.swing.JFrame {
         jButtonEntrar = new javax.swing.JButton();
         jLabelLoginVal = new javax.swing.JLabel();
         jLabelSenhaVal = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelCadastrar = new javax.swing.JLabel();
         jPasswordSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelEsqueciSenha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -45,16 +46,20 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel2.setText("Cadastra-se");
+        jLabelLoginVal.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+
+        jLabelSenhaVal.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+
+        jLabelCadastrar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabelCadastrar.setText("Cadastra-se");
 
         jPasswordSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("Acesse com suas credencias");
 
-        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel4.setText("Esqueci a senha");
+        jLabelEsqueciSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabelEsqueciSenha.setText("Esqueci a senha");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,9 +67,9 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel2)
+                .addComponent(jLabelCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(jLabelEsqueciSenha)
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
@@ -80,16 +85,19 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabelLoginVal)
                     .addComponent(jTextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
                     .addComponent(jLabelSenhaVal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(88, 88, 88))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel3)
-                .addGap(43, 43, 43)
+                .addGap(47, 47, 47)
                 .addComponent(jLabelLoginVal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -105,8 +113,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jButtonEntrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabelCadastrar)
+                    .addComponent(jLabelEsqueciSenha))
                 .addGap(27, 27, 27))
         );
 
@@ -116,28 +124,36 @@ public class Login extends javax.swing.JFrame {
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         jLabelLoginVal.setForeground(Color.red);
         jLabelSenhaVal.setForeground(Color.red);
+        var valida = 0;
+        var mensagem = "";
         
         if(jTextLogin.getText().equals("")){
-            jLabelLoginVal.setText("Digite o usuário");
+            mensagem += "Digite o usúario!\n";
+            valida++;
         } else {
-            if(jTextLogin.getText().length() > 10){
-                jLabelLoginVal.setText("Login deve conter no máximo 10 caracteres");
+            if(jTextLogin.getText().length() >= 10 || jTextLogin.getText().length() < 3){
+                jLabelLoginVal.setText("Caracteres Inválido!");
             }else{
                  jLabelLoginVal.setText("");
             }
         }
         
         if (jPasswordSenha.getText().equals("")){
-            jLabelSenhaVal.setText("Digite a senha");
+            mensagem += "Digite a senha!";
+            valida++;
         } else {
-            if(jPasswordSenha.getText().length() > 10){
-                jLabelSenhaVal.setText("Senha deve conter no máximo 10 caracteres");
+            if(jPasswordSenha.getText().length() >= 10 || jPasswordSenha.getText().length() < 3){
+                jLabelSenhaVal.setText("Caracteres Inválido!");
             }
             else{
                 jLabelSenhaVal.setText("");
             }
         }
-        //Logado
+        
+        if(valida > 0){
+            JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
+        }
+
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     public static void main(String args[]) {
@@ -169,9 +185,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEntrar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelCadastrar;
+    private javax.swing.JLabel jLabelEsqueciSenha;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelLoginVal;
     private javax.swing.JLabel jLabelSenha;
