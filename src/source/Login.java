@@ -1,5 +1,7 @@
 package source;
 
+import java.awt.Color;
+
 public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
@@ -21,7 +23,9 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 153));
+        setAutoRequestFocus(false);
+        setBackground(java.awt.Color.red);
+        setSize(new java.awt.Dimension(0, 0));
 
         jLabelLogin.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabelLogin.setText("Login:");
@@ -30,6 +34,7 @@ public class Login extends javax.swing.JFrame {
         jLabelSenha.setText("Senha:");
 
         jTextLogin.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTextLogin.setName(""); // NOI18N
 
         jButtonEntrar.setBackground(new java.awt.Color(153, 153, 153));
         jButtonEntrar.setForeground(new java.awt.Color(0, 0, 0));
@@ -44,7 +49,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Cadastra-se");
 
         jPasswordSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jPasswordSenha.setText("jPasswordField1");
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("Acesse com suas credencias");
@@ -56,84 +60,82 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(42, 42, 42))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(jButtonEntrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelLoginVal)
-                        .addGap(130, 130, 130))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelSenhaVal)
-                        .addGap(129, 129, 129))))
-            .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabelLogin)
+                    .addComponent(jLabelSenha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jButtonEntrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelLogin, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelSenha))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextLogin)
-                                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))))))
-                .addContainerGap(109, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(134, Short.MAX_VALUE)
+                    .addComponent(jLabelLoginVal)
+                    .addComponent(jTextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addGap(97, 97, 97)))
+                    .addComponent(jLabelSenhaVal))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel3)
+                .addGap(43, 43, 43)
                 .addComponent(jLabelLoginVal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelLogin)
                     .addComponent(jTextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(11, 11, 11)
                 .addComponent(jLabelSenhaVal)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelSenha)
                     .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEntrar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(61, 61, 61)
-                    .addComponent(jLabel3)
-                    .addContainerGap(222, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+        jLabelLoginVal.setForeground(Color.red);
+        jLabelSenhaVal.setForeground(Color.red);
+        
         if(jTextLogin.getText().equals("")){
             jLabelLoginVal.setText("Digite o usuário");
         } else {
-             jLabelLoginVal.setText("");
+            if(jTextLogin.getText().length() > 10){
+                jLabelLoginVal.setText("Login deve conter no máximo 10 caracteres");
+            }else{
+                 jLabelLoginVal.setText("");
+            }
         }
+        
         if (jPasswordSenha.getText().equals("")){
             jLabelSenhaVal.setText("Digite a senha");
         } else {
-            jLabelSenhaVal.setText("");
+            if(jPasswordSenha.getText().length() > 10){
+                jLabelSenhaVal.setText("Senha deve conter no máximo 10 caracteres");
+            }
+            else{
+                jLabelSenhaVal.setText("");
+            }
         }
         //Logado
     }//GEN-LAST:event_jButtonEntrarActionPerformed
