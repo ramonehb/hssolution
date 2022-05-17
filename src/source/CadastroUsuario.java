@@ -203,7 +203,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
        //Validacao
-       ValidaCadastro();
+       var retorno = ValidaCadastro();
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
     
     private boolean ValidaCadastro(){
