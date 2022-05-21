@@ -15,6 +15,7 @@ public class Usuario {
     public String senha;
     public String email;
     public String telefone;
+    public boolean flHabilitado;
     
     public Usuario(){}
     
@@ -27,8 +28,14 @@ public class Usuario {
     public String getNome(){
         return nome;
     }
-    public void setNome(String user){
-        this.login = user;
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    public String getLogin(){
+        return login;
+    }
+    public void setLogin(String login){
+        this.login = login;
     }
     public String getSenha(){
         return senha;
@@ -42,10 +49,19 @@ public class Usuario {
     public void setEmail(String email){
         this.email = email;
     }
-     public String getTelefone(){
+    public String getTelefone(){
         return email;
     }
     public void setTelefone(String telefone){
         this.telefone = telefone;
+    }
+     public boolean getFlHabilitado(){
+        return flHabilitado ;
+    }
+    public void setFlHabilitado(boolean habilitado){
+        this.flHabilitado = habilitado;
+    }
+     public String toString() {
+        return "";
     }
 }
