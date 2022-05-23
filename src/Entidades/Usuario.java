@@ -6,7 +6,7 @@ package Entidades;
 
 /**
  *
- * @author 55119
+ * @author Humberto Ramone
  */
 public class Usuario {
      public int idUsuario;

@@ -36,10 +36,9 @@ public class UsuarioDAL extends Conexao {
                                                   + "Senha = ?");
             query.setString(1, login);
             query.setString(2, senha);
-            if (query.executeQuery().next()) {
-                sucesso = true;
-            }
-
+             
+            sucesso = query.executeQuery().next();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
@@ -103,6 +102,7 @@ public class UsuarioDAL extends Conexao {
             query.setString(4, usuario.email);
             query.setString(5, usuario.telefone);
             query.setBoolean(6, usuario.flHabilitado);
+            query.setInt(7, usuario.idUsuario);
 
             sucesso = query.execute();
 
@@ -124,9 +124,10 @@ public class UsuarioDAL extends Conexao {
         try {
             conn = Conexao.abreConexao();
             assert conn != null;
-            use = conn.prepareStatement("USE banpar");
+            use = conn.prepareStatement("USE HSSolution");
             use.executeQuery();
-            query = conn.prepareStatement("SELECT * FROM usuario");
+            query = conn.prepareStatement("SELECT * "+
+                                                "FROM Usuario");
             res = query.executeQuery();
 
             while (res.next()) {
