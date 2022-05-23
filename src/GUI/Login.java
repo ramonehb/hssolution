@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -18,10 +19,10 @@ public class Login extends javax.swing.JFrame {
         jButtonEntrar = new javax.swing.JButton();
         jLabelLoginVal = new javax.swing.JLabel();
         jLabelSenhaVal = new javax.swing.JLabel();
-        jLabelCadastrar = new javax.swing.JLabel();
         jPasswordSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabelEsqueciSenha = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -38,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         jTextLogin.setName(""); // NOI18N
 
         jButtonEntrar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonEntrar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButtonEntrar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEntrar.setText("Entrar");
         jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -50,9 +52,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabelSenhaVal.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
-        jLabelCadastrar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabelCadastrar.setText("Cadastra-se");
-
         jPasswordSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -61,14 +60,22 @@ public class Login extends javax.swing.JFrame {
         jLabelEsqueciSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabelEsqueciSenha.setText("Esqueci a senha");
 
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jButton1.setText("Cadastra-se");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabelCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(jLabelEsqueciSenha)
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
@@ -111,10 +118,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEntrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCadastrar)
-                    .addComponent(jLabelEsqueciSenha))
+                    .addComponent(jLabelEsqueciSenha)
+                    .addComponent(jButton1))
                 .addGap(27, 27, 27))
         );
 
@@ -124,15 +131,16 @@ public class Login extends javax.swing.JFrame {
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         jLabelLoginVal.setForeground(Color.red);
         jLabelSenhaVal.setForeground(Color.red);
-        var valida = 0;
-        var mensagem = "";
+        int erro = 0;
+        String mensagem = "";
         
         if(jTextLogin.getText().equals("")){
             mensagem += "Digite o usúario!\n";
-            valida++;
+            erro++;
         } else {
             if(jTextLogin.getText().length() >= 10 || jTextLogin.getText().length() < 3){
-                jLabelLoginVal.setText("Caracteres Inválido!");
+                mensagem += "Usúario inválido\n";
+                erro++;
             }else{
                  jLabelLoginVal.setText("");
             }
@@ -140,21 +148,27 @@ public class Login extends javax.swing.JFrame {
         
         if (jPasswordSenha.getText().equals("")){
             mensagem += "Digite a senha!";
-            valida++;
+            erro++;
         } else {
             if(jPasswordSenha.getText().length() >= 10 || jPasswordSenha.getText().length() < 3){
-                jLabelSenhaVal.setText("Caracteres Inválido!");
+                mensagem += "Senha inválida\n";
+                erro++;
             }
             else{
                 jLabelSenhaVal.setText("");
             }
         }
         
-        if(valida > 0){
+        if(erro > 0){
             JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
         }
 
     }//GEN-LAST:event_jButtonEntrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new CadastroUsuario().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -184,9 +198,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEntrar;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelCadastrar;
     private javax.swing.JLabel jLabelEsqueciSenha;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelLoginVal;
