@@ -18,6 +18,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
      */
     public CadastroUsuario() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -203,7 +204,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
        //Validacao
-       var retorno = ValidaCadastro();
+       boolean retorno = ValidaCadastro();
+       
+       if(retorno){
+           new Login().setVisible(true);
+           setVisible(false);
+       }
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
     
     private boolean ValidaCadastro(){
@@ -211,30 +217,30 @@ public class CadastroUsuario extends javax.swing.JFrame {
         int erro = 0;
        
         if (jTextNome.getText().equals("")){
-            mensagem += "Digite o Nome!\n";
+            mensagem += "Digite o nome!\n";
             erro++;
         }
         
         if (jTextLogin.getText().equals("")){
-            mensagem += "Digite o Login!\n";
+            mensagem += "Digite o login!\n";
             erro++;
         }
        
         if (jTextSenha.getText().equals("")){
-            mensagem += "Digite a Senha!\n";
+            mensagem += "Digite a senha!\n";
             erro++;
         }
         
         if (jTextConfSenha.getText().equals("")){
-            mensagem += "Digite a Confirmação de Senha!\n";
+            mensagem += "Digite a confirmação de senha!\n";
             erro++;
         }
         
         if (jTextEmail.getText().equals("")){
-            mensagem += "Digite o Email!\n";
+            mensagem += "Digite o e-mail!\n";
             erro++;
         }
-        if (jTextSenha.getText()!=jTextConfSenha.getText());{
+        if (!jTextSenha.getText().equals(jTextConfSenha.getText())){
             mensagem += "As senhas são diferentes!\n";
             erro++;
     }
