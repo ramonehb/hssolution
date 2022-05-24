@@ -24,28 +24,21 @@ public class UsuarioDAL extends Conexao {
     private ResultSet res;
 
     public boolean autenticacao(String login, String senha) throws SQLException {
-        boolean sucesso = true;
+        boolean sucesso = false;
         try {
             conn = Conexao.abreConexao();
-            assert conn != null;
-            use = conn.prepareStatement("Use HSSolution");
-            use.executeQuery();
-            query = conn.prepareStatement("Select 1"
-                                            + "From Usuario"
-                                            + "Where Login = ? And "
-                                                  + "Senha = ?");
+            query = conn.prepareStatement("Select * From Usuario Where Login = ? And Senha = ?");
             query.setString(1, login);
             query.setString(2, senha);
              
-            sucesso = query.executeQuery().next();
+            res = query.executeQuery();
+            if (res.next())
+                sucesso = true;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
-        } finally {
-            use.close();
-            query.close();
-            conn.close();
+        }catch (Exception e) {
+            sucesso = false;
         }
 
         return sucesso;

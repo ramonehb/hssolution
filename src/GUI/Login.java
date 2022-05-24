@@ -1,5 +1,6 @@
 package GUI;
 
+import DAL.UsuarioDAL;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -161,7 +162,25 @@ public class Login extends javax.swing.JFrame {
         
         if(erro > 0){
             JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
+            return;
         }
+        
+        String login = jTextLogin.getText();
+        String senha = jPasswordSenha.getText();
+        UsuarioDAL usuario = new UsuarioDAL();
+        try {
+            if (usuario.autenticacao(login, senha)){
+                JOptionPane.showMessageDialog(null,"Bem-vindo " + jTextLogin.getText(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
+                new TelaInicial().setVisible(true);
+                this.setVisible(false);
+            }else {
+                JOptionPane.showMessageDialog(null,"Usuário não localizado","Atenção", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Contate o administrador","Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
 
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
