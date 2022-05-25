@@ -35,6 +35,7 @@ public class UsuarioDAL extends Conexao {
                 usuario.setIdUsuario(res.getInt("ID_Usuario"));
                 usuario.setLogin(res.getString("Login"));
                 usuario.setTipoUsuario(res.getInt("ID_TipoUsuario"));
+                usuario.setLogado(true);
             }
             
         } catch (SQLException e) {

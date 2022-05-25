@@ -17,6 +17,7 @@ public class Usuario {
     private String telefone;
     private boolean flHabilitado;
     private int idTipoUsuario;
+    private boolean logado;
     
     public Usuario(){}
     
@@ -74,6 +75,12 @@ public class Usuario {
     }
     public void setTipoUsuario(int id){
         this.idTipoUsuario = id;
+    }
+     public boolean getLogado(){
+        return logado ;
+    }
+    public void setLogado(boolean logado){
+        this.logado = logado;
     }
     
     public String toString() {

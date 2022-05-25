@@ -4,6 +4,8 @@ import DAL.UsuarioDAL;
 import Entidades.Sessao.Session;
 import Entidades.Usuario;
 import java.awt.Color;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -172,18 +174,18 @@ public class Login extends javax.swing.JFrame {
         UsuarioDAL usuario = new UsuarioDAL();
         try {
             Usuario us = usuario.autenticacao(login, senha);
-            if (us != null){
+            if (us.getLogado() == true){
                 Session.ID_Usuario = us.getIdUsuario();
                 Session.Login = us.getLogin();
                 Session.ID_TipoUsuario = us.getTipoUsuario();
-                
-                JOptionPane.showMessageDialog(null,"Bem-vindo " + jTextLogin.getText(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
+               
+                JOptionPane.showMessageDialog(null,"Bem-vindo " + jTextLogin.getText(),"HSSolution", JOptionPane.INFORMATION_MESSAGE);
                 new TelaInicial().setVisible(true);
                 this.setVisible(false);
             }else {
-                JOptionPane.showMessageDialog(null,"Usuário não localizado","Atenção", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Usuário não localizado","HSSolution", JOptionPane.ERROR_MESSAGE);
             }
-        }catch (Exception e){
+        }catch (HeadlessException | SQLException e){
             JOptionPane.showMessageDialog(null,"Contate o administrador","Atenção", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -204,22 +206,16 @@ public class Login extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 
