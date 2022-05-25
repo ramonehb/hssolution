@@ -9,13 +9,14 @@ package Entidades;
  * @author Humberto Ramone
  */
 public class Usuario {
-     public int idUsuario;
-    public String nome;
-    public String login;
-    public String senha;
-    public String email;
-    public String telefone;
-    public boolean flHabilitado;
+    private int idUsuario;
+    private String nome;
+    private String login;
+    private String senha;
+    private String email;
+    private String telefone;
+    private boolean flHabilitado;
+    private int idTipoUsuario;
     
     public Usuario(){}
     
@@ -25,43 +26,57 @@ public class Usuario {
     public void setIdUsuario(int id){
         this.idUsuario = id;
     }
+    
     public String getNome(){
         return nome;
     }
     public void setNome(String nome){
         this.nome = nome;
     }
+    
     public String getLogin(){
         return login;
     }
     public void setLogin(String login){
         this.login = login;
     }
+    
     public String getSenha(){
         return senha;
     }
     public void setSenha(String pass){
         this.senha = pass;
     }
+    
     public String getEmail(){
         return email;
     }
     public void setEmail(String email){
         this.email = email;
     }
+    
     public String getTelefone(){
-        return email;
+        return telefone;
     }
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
-     public boolean getFlHabilitado(){
+    
+    public boolean getFlHabilitado(){
         return flHabilitado ;
     }
     public void setFlHabilitado(boolean habilitado){
         this.flHabilitado = habilitado;
     }
-     public String toString() {
+    
+    public int getTipoUsuario(){
+        return idTipoUsuario;
+    }
+    public void setTipoUsuario(int id){
+        this.idTipoUsuario = id;
+    }
+    
+    public String toString() {
         return "";
     }
 }

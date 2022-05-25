@@ -1,6 +1,8 @@
 package GUI;
 
 import DAL.UsuarioDAL;
+import Entidades.Sessao.Session;
+import Entidades.Usuario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -169,7 +171,12 @@ public class Login extends javax.swing.JFrame {
         String senha = jPasswordSenha.getText();
         UsuarioDAL usuario = new UsuarioDAL();
         try {
-            if (usuario.autenticacao(login, senha)){
+            Usuario us = usuario.autenticacao(login, senha);
+            if (us != null){
+                Session.ID_Usuario = us.getIdUsuario();
+                Session.Login = us.getLogin();
+                Session.ID_TipoUsuario = us.getTipoUsuario();
+                
                 JOptionPane.showMessageDialog(null,"Bem-vindo " + jTextLogin.getText(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
                 new TelaInicial().setVisible(true);
                 this.setVisible(false);

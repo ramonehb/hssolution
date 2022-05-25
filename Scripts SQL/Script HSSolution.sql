@@ -13,10 +13,22 @@ Create Table Usuario
     ,FL_Habilitado              Bit
     
     ,Constraint UC_Usuario Unique (Login,Email)
+    ,Constraint FK_ID_TipoUsuario Foreign Key (ID_TipoUsuario) References TipoUsuario (ID_TipoUsuario)
     ,Primary Key (ID_Usuario)
 )
 
 Insert Into Usuario (Nome, Login, Senha, Email, Telefone, FL_Habilitado)
 	Values ('Felipe Narcizo', 'felipe', '321', 'felipe.narcizo@hssolution.com.br', '1199873749488', 1)
     
-Select * From Usuario
+    
+Create Table TipoUsuario
+(
+     ID_TipoUsuario Int
+    ,Nome 	    Varchar(100) Not Null
+    ,Primary Key(ID_TipoUsuario)
+)
+
+Insert Into TipoUsuario(ID_TipoUsuario, Nome) 
+    Values (1, 'Administrador')
+Insert Into TipoUsuario(ID_TipoUsuario, Nome)
+    Values (2, 'Atendente')

@@ -20,57 +20,52 @@ public class UsuarioDAL extends Conexao {
 
     private Connection conn;
     private PreparedStatement query;
-    private PreparedStatement use;
     private ResultSet res;
 
-    public boolean autenticacao(String login, String senha) throws SQLException {
-        boolean sucesso = false;
+    public Usuario autenticacao(String login, String senha) throws SQLException {
+        Usuario usuario = new Usuario();
         try {
             conn = Conexao.abreConexao();
-            query = conn.prepareStatement("Select * From Usuario Where Login = ? And Senha = ?");
+            query = conn.prepareStatement("Select * From Usuario Where Login = ? And Senha = ? Limit 1");
             query.setString(1, login);
             query.setString(2, senha);
              
             res = query.executeQuery();
-            if (res.next())
-                sucesso = true;
+            while (res.next()){
+                usuario.setIdUsuario(res.getInt("ID_Usuario"));
+                usuario.setLogin(res.getString("Login"));
+                usuario.setTipoUsuario(res.getInt("ID_TipoUsuario"));
+            }
             
         } catch (SQLException e) {
-            sucesso = false;
+            return null;
         }catch (Exception e) {
-            sucesso = false;
+            return null;
         }
 
-        return sucesso;
+        return usuario;
     }
 
     public boolean criarUsuario(Usuario usuario) throws SQLException {
         boolean sucesso;
         try {
             conn = Conexao.abreConexao();
-            assert conn != null;
-            use = conn.prepareStatement("Use HSSolution");
-            use.executeQuery();
-            query = conn.prepareStatement("Insert Into Usuario"+
-                                                    "Values (?, ?, ?, ?, ?, ?)");
-            query.setString(1, usuario.nome);
-            query.setString(2, usuario.login);
-            query.setString(3, usuario.senha);
-            query.setString(4, usuario.email);
-            query.setString(5, usuario.telefone);
-            query.setBoolean(6, usuario.flHabilitado);
-            
-            sucesso = query.execute();
+            query = conn.prepareStatement("Insert Into Usuario (Nome, Login, Senha, Email, Telefone, FL_Habilitado, ID_TipoUsuario) Values (?, ?, ?, ?, ?, ?, ?)");
+            query.setString(1, usuario.getNome());
+            query.setString(2, usuario.getLogin());
+            query.setString(3, usuario.getSenha());
+            query.setString(4, usuario.getEmail());
+            query.setString(5, usuario.getTelefone());
+            query.setBoolean(6, usuario.getFlHabilitado());
+            query.setInt(7, usuario.getTipoUsuario());
+            query.execute();
+            sucesso = true;
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
-        } finally {
-            use.close();
-            query.close();
-            conn.close();
         }
-
+        
         return sucesso;
     }
 
@@ -78,36 +73,23 @@ public class UsuarioDAL extends Conexao {
         boolean sucesso;
         try {
             conn = Conexao.abreConexao();
-            assert conn != null;
-            use = conn.prepareStatement("Use HSSolution");
-            use.executeQuery();
-            query = conn.prepareStatement("Update Usuario "
-                    + "Set Nome = ?"
-                    + ",Login = ?"
-                    + ",Senha = ?"
-                    + ",Email = ?"
-                    + ",Telefone"
-                    + ",FL_Habilitado = ?"
-                    + "Where ID_Usuario = ?");
-            query.setString(1, usuario.nome);
-            query.setString(2, usuario.login);
-            query.setString(3, usuario.senha);
-            query.setString(4, usuario.email);
-            query.setString(5, usuario.telefone);
-            query.setBoolean(6, usuario.flHabilitado);
-            query.setInt(7, usuario.idUsuario);
-
-            sucesso = query.execute();
+            query = conn.prepareStatement("Update Usuario Set Nome = ?, Login = ?, Senha = ?, Email = ?, Telefone = ?, FL_Habilitado = ?, ID_TipoUsuario = ? Where ID_Usuario = ?");
+            query.setString(1, usuario.getNome());
+            query.setString(2, usuario.getLogin());
+            query.setString(3, usuario.getSenha());
+            query.setString(4, usuario.getEmail());
+            query.setString(5,  usuario.getTelefone());
+            query.setBoolean(6, usuario.getFlHabilitado());
+            query.setInt(7, usuario.getIdUsuario());
+            query.setInt(8, usuario.getTipoUsuario());
+            query.execute();
+            sucesso = true;
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
-        } finally {
-            use.close();
-            query.close();
-            conn.close();
         }
-
+        
         return sucesso;
     }
     
@@ -116,11 +98,7 @@ public class UsuarioDAL extends Conexao {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
             conn = Conexao.abreConexao();
-            assert conn != null;
-            use = conn.prepareStatement("USE HSSolution");
-            use.executeQuery();
-            query = conn.prepareStatement("SELECT * "+
-                                                "FROM Usuario");
+            query = conn.prepareStatement("SELECT * FROM Usuario");
             res = query.executeQuery();
 
             while (res.next()) {
@@ -136,11 +114,6 @@ public class UsuarioDAL extends Conexao {
             }            
         } catch (SQLException e) {
            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
-        }finally {
-            conn.close();
-            use.close();
-            query.close();
-            res.close();
         }
         
         return usuarios;
@@ -150,23 +123,26 @@ public class UsuarioDAL extends Conexao {
         boolean sucesso;
         try {
             conn = Conexao.abreConexao();
-            assert conn != null;
-            use = conn.prepareStatement("Use HSSolution");
-            use.executeQuery();
-            query = conn.prepareStatement("Delete From Usuario "+
-                                          "Where ID_Usuario = ?");
+            query = conn.prepareStatement("Delete From Usuario Where ID_Usuario = ?");
             query.setInt(1, idUsuario);
-            sucesso = query.execute();
-           
+            query.execute();
+            sucesso = true;
         }catch (SQLException e) {
            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
            sucesso = false;
-        }finally {
-            conn.close();
-            use.close();
-            query.close();
         }
         
         return sucesso;
+    }
+    
+    public ResultSet listaTipoUsuario(){
+        try {
+            conn = Conexao.abreConexao();
+            query = conn.prepareStatement("Select * From TipoUsuario");
+            return query.executeQuery();
+        }catch (SQLException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+           return null;
+        }
     }
 }
