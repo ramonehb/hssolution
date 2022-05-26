@@ -29,7 +29,7 @@ public class ClienteDAL extends Conexao{
             query = conn.prepareStatement("Insert Into Cliente (Nome, Email, DT_Nasc, Telefone, TP_Cliente, CpfCnpj, Cep, Endereco, Bairro, Cidade, Estado) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
             query.setString(1, cliente.getNome());
             query.setString(2, cliente.getEmail());
-            query.setDate(3, new java.sql.Date(cliente.getDataNascimento()));
+//            query.setDate(3, new java.sql.Date(cliente.getDataNascimento()));
             query.setString(4, cliente.getTelefone());
             query.setString(5, cliente.getTpCliente());
             query.setString(6, cliente.getCpfCnpj());
