@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/ProjetoJava/hssolution/src/GUI/Login.java</file>
-=======
             <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/Entidades/Usuario.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/Entidades/Sessao.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/TelaInicial.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/CadastroUsuario.java</file>
             <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/DAL/UsuarioDAL.java</file>
->>>>>>> TelaInicial
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/Login.java</file>
         </group>
     </open-files>
 </project-private>
