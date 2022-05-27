@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import DAL.UsuarioDAL;
+import Entidades.Sessao.Session;
 import Entidades.Usuario;
+import Jm.JMascara;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -41,9 +39,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jTextSenha = new javax.swing.JPasswordField();
         jTextConfSenha = new javax.swing.JPasswordField();
         jTextEmail = new javax.swing.JTextField();
-        jTextTelefone = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jComboBoxTipoProduto = new javax.swing.JComboBox<>();
+        jTextTelefone = new javax.swing.JTextField();
+        jButtonCancelar = new javax.swing.JButton();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -59,7 +58,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Cadastre-se");
 
-        jButtonFinalizar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jButtonFinalizar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButtonFinalizar.setText("Finalizar");
         jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,16 +124,25 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTextTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextTelefoneKeyTyped(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("Tipo do usuário:");
 
         jComboBoxTipoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+
+        jTextTelefone.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextTelefoneKeyReleased(evt);
+            }
+        });
+
+        jButtonCancelar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,8 +150,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextTelefone)
+                            .addComponent(jComboBoxTipoProduto, 0, 196, Short.MAX_VALUE)))
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,21 +167,20 @@ public class CadastroUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonFinalizar)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                                 .addComponent(jTextLogin)
                                 .addComponent(jTextNome)
-                                .addComponent(jTextConfSenha)
-                                .addComponent(jTextEmail)
-                                .addComponent(jTextTelefone))
-                            .addComponent(jLabel1)))
+                                .addComponent(jTextEmail))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxTipoProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(114, 114, 114)
+                        .addComponent(jButtonFinalizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,10 +200,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,12 +211,14 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jComboBoxTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonFinalizar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonFinalizar)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -229,7 +245,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 UsuarioDAL usuarioDAL = new UsuarioDAL();
                 if (usuarioDAL.criarUsuario(usuario)){
                     JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                    new Login().setVisible(true);
+                    
+                    if (Session.ID_Usuario == 0){
+                        new Login().setVisible(true);
+                    }
+                            
                     setVisible(false);
                 }
             }   
@@ -333,16 +353,17 @@ public class CadastroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextLoginActionPerformed
 
-    private void jTextTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTelefoneKeyTyped
-        if (jTextTelefone.getText().length() >=20){
-        evt.consume();
-        Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_jTextTelefoneKeyTyped
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentShown
+
+    private void jTextTelefoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTelefoneKeyReleased
+        jTextTelefone.setText(JMascara.GetJmascaraFone(jTextTelefone.getText()));
+    }//GEN-LAST:event_jTextTelefoneKeyReleased
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,6 +401,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JToggleButton jButtonFinalizar;
     private javax.swing.JComboBox<String> jComboBoxTipoProduto;
     private javax.swing.JLabel jLabel1;

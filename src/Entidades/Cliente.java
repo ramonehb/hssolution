@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import java.util.Date;
@@ -19,13 +15,13 @@ public class Cliente {
     private String Telefone;
     private String TP_Cliente;
     private String CpfCnpj;
-    private String Cep;
-    private String Endereco;
-    private String Bairro;
-    private String Cidade;
-    private String Estado;
+    private Endereco Endereco;
     
     public Cliente(){
+    }
+    
+    public Cliente(Endereco endereco){
+        this.Endereco = new Endereco();
     }
     
     public int getIdCliente(){
@@ -82,46 +78,13 @@ public class Cliente {
     
     public void setCpfCnpj(String cpfCnpj){
         this.CpfCnpj = cpfCnpj;
-    }
+    }    
     
-    public String getCep(){
-        return this.Cep;
-    }
-    
-    public void setCep(String cep){
-        this.Cep = cep;
-    }
-    
-    public String getEndereco(){
+    public Endereco getEndereco(){
         return this.Endereco;
     }
     
-    public void setEndereco(String endereco){
+    public void setEndereco(Endereco endereco){
         this.Endereco = endereco;
     }
-    
-    public String getBairro(){
-        return this.Bairro;
-    }
-    
-    public void setBairro(String bairro){
-        this.Bairro = bairro;
-    }
-    
-    public String getCidade(){
-        return this.Cidade;
-    }
-    
-    public void setCidade(String cidade){
-        this.Cidade = cidade;
-    }
-    
-    public String getEstado(){
-        return this.Estado;
-    }
-    
-    public void setEstado(String estado){
-        this.Estado = estado;
-    }
-    
 }
