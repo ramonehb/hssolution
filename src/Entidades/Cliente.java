@@ -27,7 +27,6 @@ public class Cliente {
     public int getIdCliente(){
         return this.ID_Cliente;
     }
-    
     public void setIdCliente(int id){
         this.ID_Cliente = id;
     }
@@ -35,7 +34,6 @@ public class Cliente {
     public String getNome(){
         return this.Nome;
     }
-    
     public void setNome(String nome){
         this.Nome = nome;
     }
@@ -43,7 +41,6 @@ public class Cliente {
     public String getEmail(){
         return this.Email;
     }
-    
     public void setEmail(String email){
         this.Email = email;
     }
@@ -51,7 +48,6 @@ public class Cliente {
     public Date getDataNascimento(){
         return this.DT_Nasc;
     }
-    
     public void setDataNascimento(Date dtNascimento){
         this.DT_Nasc = dtNascimento;
     }
@@ -59,7 +55,6 @@ public class Cliente {
     public String getTelefone(){
         return this.Telefone;
     }
-    
     public void setTelefone(String telefone){
         this.Telefone = telefone;
     }
@@ -67,7 +62,6 @@ public class Cliente {
     public String getTpCliente(){
         return this.TP_Cliente;
     }
-    
     public void setTpCliente(String tpCliente){
         this.TP_Cliente = tpCliente;
     }
@@ -75,7 +69,6 @@ public class Cliente {
     public String getCpfCnpj(){
         return this.CpfCnpj;
     }
-    
     public void setCpfCnpj(String cpfCnpj){
         this.CpfCnpj = cpfCnpj;
     }    
@@ -83,7 +76,6 @@ public class Cliente {
     public Endereco getEndereco(){
         return this.Endereco;
     }
-    
     public void setEndereco(Endereco endereco){
         this.Endereco = endereco;
     }
