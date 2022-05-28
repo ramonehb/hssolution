@@ -33,8 +33,8 @@ Create Table Cliente (
 	 ID_Cliente Int Auto_Increment
     ,Nome           Varchar(100) Not Null
     ,Email          Varchar(100) Not Null
-    ,DT_Nasc        Date         Null
-    ,Telefone       Varchar(11)  Not Null
+    ,DT_Nasc        Date         Not Null
+    ,Telefone       Varchar(20)  Not Null
     ,TP_Cliente     Varchar(10)  Not Null
     ,CpfCnpj        Varchar(14)  Not Null
     ,Cep            Varchar(8)
