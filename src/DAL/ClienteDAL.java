@@ -25,9 +25,9 @@ public class ClienteDAL extends Conexao{
             query.setString(1, cliente.getNome());
             query.setString(2, cliente.getEmail());
             query.setDate(3, new java.sql.Date(cliente.getDataNascimento().getTime()));
-            query.setString(4, cliente.getTelefone());
+            query.setString(4, cliente.getTelefone().replace(" ","").replace("(", "").replace(")", "").replace("-", ""));
             query.setString(5, cliente.getTpCliente());
-            query.setString(6, cliente.getCpfCnpj());
+            query.setString(6, cliente.getCpfCnpj().replace("-", "").replace("/","").replace(".",""));
             query.setString(7, cliente.getEndereco().getCep());
             query.setString(8, cliente.getEndereco().getEndereco());
             query.setString(9, cliente.getEndereco().getBairro());
