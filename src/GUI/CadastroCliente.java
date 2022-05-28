@@ -276,9 +276,24 @@ public class CadastroCliente extends javax.swing.JFrame {
             mensagem += "Digite o e-mail\n";
             erro++;
         }
+        if(jTextDataNascimento.getText() == null || jTextDataNascimento.getText().equals("")){
+            mensagem += "Digite a data de nascimento\n";
+            erro++;
+        }
+        if(jTextTelefone.getText() == null || jTextTelefone.getText().equals("")){
+            mensagem += "Digite o número de telefone\n";
+            erro++;
+        }
+        if(jTextCpfCnpj.getText() == null || jTextCpfCnpj.getText().equals("")){
+            mensagem += "Digite o número de CPF ou CNPJ\n";
+            erro++;
+        }
+            
+            
         
         if(erro > 0){
             JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
+            return;
         }
         
         try {
@@ -303,7 +318,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             
             if(clienteDAL.criarCliente(cliente)){
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                new CadastroCliente().setVisible(true);
                 setVisible(false);
             }
         } catch (SQLException ex) {
