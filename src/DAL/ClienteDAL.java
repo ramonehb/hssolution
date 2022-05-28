@@ -40,8 +40,6 @@ public class ClienteDAL extends Conexao{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
-        } finally {
-            conn.close();
         }
         
         return sucesso;

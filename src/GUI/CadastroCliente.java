@@ -282,15 +282,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
         
         try {
-            
             SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-
             Date dtNasc = dt.parse(jTextDataNascimento.getText());
-            
             Cliente cliente = new Cliente();
             cliente.setNome(jTextNome.getText());
             cliente.setEmail(jTextEmail.getText());
-//            cliente.setDataNascimento(dtNasc);
+            cliente.setDataNascimento(dtNasc);
             cliente.setTelefone(jTextTelefone.getText());
             cliente.setTpCliente(jCbTpCliente.getSelectedItem().toString() == "0" ? "Física" : "Juridica");
             cliente.setCpfCnpj(jTextCpfCnpj.getText());
