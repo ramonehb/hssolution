@@ -13,7 +13,7 @@ public class Cliente {
     private String Email;
     private Date DT_Nasc;
     private String Telefone;
-    private String TP_Cliente;
+    private int idTipoCliente;
     private String CpfCnpj;
     private Endereco Endereco;
     
@@ -59,11 +59,11 @@ public class Cliente {
         this.Telefone = telefone;
     }
     
-    public String getTpCliente(){
-        return this.TP_Cliente;
+    public int getIdTipoCliente(){
+        return this.idTipoCliente;
     }
-    public void setTpCliente(String tpCliente){
-        this.TP_Cliente = tpCliente;
+    public void setIdTipoCliente(int idTipoCliente){
+        this.idTipoCliente = idTipoCliente;
     }
     
     public String getCpfCnpj(){
