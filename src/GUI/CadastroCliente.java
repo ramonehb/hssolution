@@ -291,6 +291,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void jTextCpfCnpjKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCpfCnpjKeyReleased
         jTextCpfCnpj.setText(JMascara.GetJmascaraCpfCnpj(jTextCpfCnpj.getText()));
+        jCbTpCliente.setSelectedIndex( jTextCpfCnpj.getText().length() <= 14 ? 1 : 2);
     }//GEN-LAST:event_jTextCpfCnpjKeyReleased
 
     private void jCbTpClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbTpClienteActionPerformed
@@ -341,6 +342,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         try {
             SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
             Date dtNasc = dt.parse(jTextDataNascimento.getText());
+            
             Cliente cliente = new Cliente();
             cliente.setNome(jTextNome.getText());
             cliente.setEmail(jTextEmail.getText());
@@ -354,7 +356,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             endereco.setCep(jFormattedCep.getText());
             endereco.setLogradouro(jTextEndereco.getText());
             endereco.setUf(jTextEstado.getText());
-            endereco.setNumero(Integer.parseInt(jTextNumero.getText()));
+            endereco.setNumero(jTextNumero.getText());
             endereco.setComplemento(jTextComplemento.getText());
             cliente.setEndereco(endereco);
             
@@ -381,16 +383,9 @@ public class CadastroCliente extends javax.swing.JFrame {
             Endereco endereco = ServicoDeCep.buscaEnderecoPelo(jFormattedCep.getText());
             
             if(endereco.getLogradouro() == null && endereco.getLocalidade() == null && endereco.getUf() == null && endereco.getBairro() == null){
-                JOptionPane.showMessageDialog(null,"CEP Inválido!","Atenção", JOptionPane.CANCEL_OPTION);
+                JOptionPane.showMessageDialog(null,"CEP inválido!","Atenção", JOptionPane.CANCEL_OPTION);
                 return;
             }
-            
-            /*if(jFormattedCep.getText().equals("") || jFormattedCep.getText() == null){
-                jTextEndereco.setText("");
-                jTextCidade.setText("");
-                jTextBairro.setText("");
-                jTextEstado.setText("");
-            }*/
             
             jTextEndereco.setText(endereco.getLogradouro());
             jTextCidade.setText(endereco.getLocalidade());

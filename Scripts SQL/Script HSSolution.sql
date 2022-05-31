@@ -55,7 +55,7 @@ Create Table Cliente (
     ,Cidade         Varchar(50)
     ,Estado         Varchar(2)
     ,Numero         Int
-    ,Complemento	Varchar(50)
+    ,Complemento    Varchar(50)
     
     ,Constraint FK_ID_TipoCliente Foreign Key (ID_TipoCliente) References TipoCliente (ID_TipoCliente)
     ,Primary Key (ID_Cliente)

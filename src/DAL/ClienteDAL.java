@@ -33,7 +33,7 @@ public class ClienteDAL extends Conexao{
             query.setString(9, cliente.getEndereco().getBairro());
             query.setString(10, cliente.getEndereco().getLocalidade());
             query.setString(11, cliente.getEndereco().getUf());
-            query.setInt(12, cliente.getEndereco().getNumero());
+            query.setString(12, cliente.getEndereco().getNumero());
             query.setString(13, cliente.getEndereco().getComplemento());
             query.execute();
             
