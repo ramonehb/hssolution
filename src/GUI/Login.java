@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
             if (us.getLogado() == true){
                 Session.ID_Usuario = us.getIdUsuario();
                 Session.Login = us.getLogin();
-                Session.ID_TipoUsuario = us.getTipoUsuario();
+                Session.ID_TipoUsuario = us.getTipoUsuario().getIdTipoUsuario();
                
                 JOptionPane.showMessageDialog(null,"Bem-vindo " + jTextLogin.getText(),"HSSolution", JOptionPane.INFORMATION_MESSAGE);
                 new TelaInicial().setVisible(true);

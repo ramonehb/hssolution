@@ -2,6 +2,7 @@ package GUI;
 
 import DAL.UsuarioDAL;
 import Entidades.Sessao.Session;
+import Entidades.TipoUsuario;
 import Entidades.Usuario;
 import Jm.JMascara;
 import java.awt.HeadlessException;
@@ -234,12 +235,14 @@ public class CadastroUsuario extends javax.swing.JFrame {
        try {
             if(retorno){
                 Usuario usuario = new Usuario();
+                TipoUsuario tipoUsuario = new TipoUsuario();
                 usuario.setNome(jTextNome.getText());
                 usuario.setLogin(jTextLogin.getText());
                 usuario.setSenha(jTextSenha.getText());
                 usuario.setEmail(jTextEmail.getText());
                 usuario.setTelefone(jTextTelefone.getText());
-                usuario.setTipoUsuario(jComboBoxTipoProduto.getSelectedItem().toString() == "Administrador" ? 1 : 2);
+                tipoUsuario.setIdTipoUsuario(jComboBoxTipoProduto.getSelectedItem().toString() == "Administrador" ? 1 : 2);
+                usuario.setTipoUsuario(tipoUsuario);
                 usuario.setFlHabilitado(true);
            
                 UsuarioDAL usuarioDAL = new UsuarioDAL();

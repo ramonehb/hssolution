@@ -1,5 +1,6 @@
 package DAL;
 
+import Entidades.TipoUsuario;
 import Entidades.Usuario;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
@@ -20,6 +21,8 @@ public class UsuarioDAL extends Conexao {
 
     public Usuario autenticacao(String login, String senha) throws SQLException {
         Usuario usuario = new Usuario();
+        TipoUsuario tipoUsuario = new TipoUsuario();
+        
         try {
             conn = Conexao.abreConexao();
             query = conn.prepareStatement("Select * From Usuario Where Login = ? And Senha = ? Limit 1");
@@ -30,7 +33,8 @@ public class UsuarioDAL extends Conexao {
             while (res.next()){
                 usuario.setIdUsuario(res.getInt("ID_Usuario"));
                 usuario.setLogin(res.getString("Login"));
-                usuario.setTipoUsuario(res.getInt("ID_TipoUsuario"));
+                tipoUsuario.setIdTipoUsuario(res.getInt("ID_TipoUsuario"));
+                usuario.setTipoUsuario(tipoUsuario);
                 usuario.setLogado(true);
             }
             
@@ -54,7 +58,7 @@ public class UsuarioDAL extends Conexao {
             query.setString(4, usuario.getEmail());
             query.setString(5, usuario.getTelefone());
             query.setBoolean(6, usuario.getFlHabilitado());
-            query.setInt(7, usuario.getTipoUsuario());
+            query.setInt(7, usuario.getTipoUsuario().getIdTipoUsuario());
             query.execute();
             sucesso = true;
             
@@ -78,7 +82,7 @@ public class UsuarioDAL extends Conexao {
             query.setString(5,  usuario.getTelefone());
             query.setBoolean(6, usuario.getFlHabilitado());
             query.setInt(7, usuario.getIdUsuario());
-            query.setInt(8, usuario.getTipoUsuario());
+            query.setInt(8, usuario.getTipoUsuario().getIdTipoUsuario());
             query.execute();
             sucesso = true;
 
@@ -100,12 +104,15 @@ public class UsuarioDAL extends Conexao {
 
             while (res.next()) {
                 Usuario u = new Usuario();
+                TipoUsuario t = new TipoUsuario();
                 u.setIdUsuario(res.getInt("ID_Usuario"));
                 u.setNome(res.getString("Nome"));
                 u.setLogin(res.getString("Login"));
                 u.setSenha(res.getString("Senha"));
                 u.setEmail(res.getString("Email"));
                 u.setTelefone(res.getString("Telefone"));
+                t.setIdTipoUsuario(res.getInt("ID_TipoUsuario"));
+                u.setTipoUsuario(t);
                 u.setFlHabilitado(res.getBoolean("FL_Habilitado"));
                 usuarios.add(u);
             }            

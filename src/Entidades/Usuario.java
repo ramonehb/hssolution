@@ -5,81 +5,81 @@ package Entidades;
  * @author Humberto Ramone
  */
 public class Usuario {
-    private int idUsuario;
-    private String nome;
-    private String login;
-    private String senha;
-    private String email;
-    private String telefone;
-    private boolean flHabilitado;
-    private int idTipoUsuario;
-    private boolean logado;
+    private int ID_Usuario;
+    private String Nome;
+    private String Login;
+    private String Senha;
+    private String Email;
+    private String Telefone;
+    private boolean FL_Habilitado;
+    private TipoUsuario TipoUsuario;
+    private boolean Logado;
     
     public Usuario(){}
     
+    public Usuario(TipoUsuario endereco){
+        this.TipoUsuario = new TipoUsuario();
+    }
+    
     public int getIdUsuario(){
-        return idUsuario;
+        return ID_Usuario;
     }
     public void setIdUsuario(int id){
-        this.idUsuario = id;
+        this.ID_Usuario = id;
     }
     
     public String getNome(){
-        return nome;
+        return Nome;
     }
     public void setNome(String nome){
-        this.nome = nome;
+        this.Nome = nome;
     }
     
     public String getLogin(){
-        return login;
+        return Login;
     }
     public void setLogin(String login){
-        this.login = login;
+        this.Login = login;
     }
     
     public String getSenha(){
-        return senha;
+        return Senha;
     }
     public void setSenha(String pass){
-        this.senha = pass;
+        this.Senha = pass;
     }
     
     public String getEmail(){
-        return email;
+        return Email;
     }
     public void setEmail(String email){
-        this.email = email;
+        this.Email = email;
     }
     
     public String getTelefone(){
-        return telefone;
+        return Telefone;
     }
     public void setTelefone(String telefone){
-        this.telefone = telefone;
+        this.Telefone = telefone;
     }
     
     public boolean getFlHabilitado(){
-        return flHabilitado ;
+        return FL_Habilitado ;
     }
     public void setFlHabilitado(boolean habilitado){
-        this.flHabilitado = habilitado;
+        this.FL_Habilitado = habilitado;
     }
     
-    public int getTipoUsuario(){
-        return idTipoUsuario;
+    public TipoUsuario getTipoUsuario(){
+        return TipoUsuario;
     }
-    public void setTipoUsuario(int id){
-        this.idTipoUsuario = id;
+    public void setTipoUsuario(TipoUsuario tipoUsuario){
+        this.TipoUsuario = tipoUsuario;
     }
      public boolean getLogado(){
-        return logado ;
+        return Logado;
     }
     public void setLogado(boolean logado){
-        this.logado = logado;
-    }
-    
-    public String toString() {
-        return "";
+        this.Logado = logado;
     }
 }
