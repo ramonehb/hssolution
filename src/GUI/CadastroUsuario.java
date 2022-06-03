@@ -248,11 +248,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 UsuarioDAL usuarioDAL = new UsuarioDAL();
                 if (usuarioDAL.criarUsuario(usuario)){
                     JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    if (Session.ID_Usuario == 0){
-                        new Login().setVisible(true);
-                    }
-                            
                     setVisible(false);
                 }
             }   
@@ -269,7 +264,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
             while (res.next()){
                 jComboBoxTipoProduto.addItem(res.getString(2));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

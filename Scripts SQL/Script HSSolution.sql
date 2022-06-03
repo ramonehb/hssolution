@@ -1,3 +1,5 @@
+
+
 Create Database HSSolution
 
 Use HSSolution
@@ -10,9 +12,7 @@ Create Table TipoUsuario
 )
 
 Insert Into TipoUsuario(ID_TipoUsuario, Nome) 
-    Values (1, 'Administrador')
-Insert Into TipoUsuario(ID_TipoUsuario, Nome)
-    Values (2, 'Atendente')
+    Values (1, 'Administrador'), (2, 'Atendente')
 
 Create Table Usuario 
 (
@@ -38,11 +38,8 @@ Create Table TipoCliente
 )
 
 Insert Into TipoCliente(ID_TipoCliente, Nome)
-	Values(1, 'Física'),2, 'Jurídica')
-Create Table ClienteEndereco
-(
-    ID_Endereco Int Auto
-)
+	Values(1, 'Física'),(2, 'Jurídica')
+    
 
 Create Table Cliente (
 	 ID_Cliente Int Auto_Increment
@@ -58,12 +55,27 @@ Create Table Cliente (
     
 )
 
-Create Table Tipo_Produto 
+Create Table ClienteEndereco
 (
-	,ID_TipoProduto		Int
-	,Categoria		Varcgar(100) Not Null
+     ID_Endereco Int Auto_Increment
+    ,ID_Cliente 	Int Not Null
+    ,Cep			Varchar(8)
+    ,Endereco 		Varchar(100)
+    ,Bairro			Varchar(50)
+    ,Estado			Varchar(2)
+    ,Numero 		Int
+    ,Complemento	Varchar(50)
+    
+    ,Primary Key (ID_Endereco)
+    ,Constraint FK_ID_Cliente Foreign Key (ID_Cliente) References Cliente (ID_Cliente)
+)
 
-	,Primary Key (ID_Cliente)
+Create Table TipoProduto 
+(
+	ID_TipoProduto		Int Auto_Increment
+	,Categoria		Varchar(100) Not Null
+
+	,Primary Key (ID_TipoProduto)
 )
 
 Create Table Produto 
@@ -73,22 +85,35 @@ Create Table Produto
 	,Nome				Varchar(100) Not Null
 	,VL_Pago			Numeric(10,5) Not Null
 	,VL_Venda			Numeric(10,5) Not Null
-	,Lucro				As (IsNull(VL_Venda, 0) - IsNull(VL_Pago, 0 ))
 	,Quantidade			Int Null
 	,ID_UsuarioCadastro		Int Not Null
 
 	,Primary Key (ID_Produto)
-	,Constraint FK_ID_TipoProduto   Foreign Key (ID_TipoProduto)     References Tipo_Produto(ID_TipoProduto)
+	,Constraint FK_ID_TipoProduto   Foreign Key (ID_TipoProduto)     References TipoProduto(ID_TipoProduto)
 	,Constraint FK_ID_Usuario       Foreign Key (ID_UsuarioCadastro) References Usuario(ID_Usuario)
 )
+
 Create Table PedidoStatus 
 (
-	ID_PedidoStatus Int Not Null,
-	Descricao	Varchar(50)
+	 ID_PedidoStatus Int Not Null
+	,Descricao	Varchar(50)
+    
+    ,Primary Key(ID_PedidoStatus)
 )
 
 Insert PedidoStatus 
 	Values (1,'Em Processamento'),(2,'Pagamento Pendente'),(3,'Finalizado')
+    
+Create Table FormaPagamento
+(
+	 ID_FormaPagamento	Int
+	,Descricao		Varchar(50) NOT NULL
+
+	,Primary Key (ID_FormaPagamento)
+)
+
+Insert FormaPagamento 
+	Values (1,'Dinheiro'),(2,'Debito'),(3,'Pix'),(4,'Crédito'),(5, 'Outro')
 
 Create Table Pedido 
 (
@@ -98,12 +123,12 @@ Create Table Pedido
 	,ID_PedidoStatus        Int Not Null
 	,ID_Usuario		Int Not Null
 	,DT_Venda		DateTime Null
-	,VL_Total		Numeric(10,5) Null
+	,VL_Total		Float
 
 	,Primary Key  (ID_Pedido)
-	,Constraint FK_ID_PedidoStatus   Foreign Key (ID_PedidoStatus)   References PedidoStatus (ID_PedidoStatus)
-	,Constraint FK_ID_Cliente        Foreign Key (ID_Cliente)        References Cliente(ID_Cliente)
-	,Constraint FK_ID_FormaPagamento Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
+	,Constraint FK_ID_PedidoStatus          Foreign Key (ID_PedidoStatus)   References PedidoStatus (ID_PedidoStatus)
+	,Constraint FK_ID_Cliente_Pedido        Foreign Key (ID_Cliente)        References Cliente(ID_Cliente)
+	,Constraint FK_ID_FormaPagamento        Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
 )
 
 Create Table ItemPedido
@@ -112,23 +137,12 @@ Create Table ItemPedido
 	,ID_Pedido		Int Not Null
 	,ID_Produto		Int Not Null
 	,Quantidade		Int Not Null
-	,SubTotal		Numeric(10,5) Not Null
+	,SubTotal		Float Not Null
 
-	,Primary Key (ID_ItemPedido),
+	,Primary Key (ID_ItemPedido)
 	,Constraint FK_ID_Pedido     Foreign Key (ID_Pedido) References Pedido (ID_Pedido)
 	,Constraint FK_ID_Produto    Foreign Key(ID_Produto) References Produto (ID_Produto)
 )
-
-Create Table FormaPagamento
-(
-	 ID_FormaPagamento	Int
-	,Descricao		Varchar(50) NOT NULL
-
-	,Primary Key (ID_FormaPagamento)
-)
-
-Insert FormaPagamento	
-	Value (1,'Dinheiro'),(2,'Cartão Debito'),(3,'Cartão Crédito'),(4,'Pix')
 
 
 
