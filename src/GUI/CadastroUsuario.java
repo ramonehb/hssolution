@@ -226,10 +226,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextEmailActionPerformed
-
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
        boolean retorno = ValidaCadastro();
        try {
@@ -252,7 +248,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 }
             }   
        }catch (HeadlessException | SQLException e){
-           JOptionPane.showMessageDialog(null,"Contate o administrador","Atenção", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+ e.getMessage(),"Atenção", JOptionPane.ERROR_MESSAGE);
        }
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
     
@@ -363,6 +359,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextEmailActionPerformed
 
     /**
      * @param args the command line arguments
