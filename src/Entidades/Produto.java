@@ -1,3 +1,7 @@
+package Entidades;
+
+import java.util.Date;
+
 /**
  *
  * @author Felipe
@@ -6,9 +10,12 @@ public class Produto {
     private int ID_Produto;
     private String Nome;
     private String TipoProduto;
+    //private TipoProduto TipoProduto;
+    //private ID_UsuarioCadastro;
     private int Quantidade;
     private double VL_Pago;
     private double VL_Venda;
+    //private Date DT_Cadastro;
             
     public Produto(){}
     

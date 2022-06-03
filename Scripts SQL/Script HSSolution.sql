@@ -16,7 +16,7 @@ Insert Into TipoUsuario(ID_TipoUsuario, Nome)
 
 Create Table Usuario 
 (
-	 ID_Usuario Int Auto_Increment
+     ID_Usuario Int Auto_Increment
     ,Nome           Varchar(100) Not Null
     ,Login          Varchar(20) Not Null 
     ,Senha          Varchar(64) Not Null
@@ -39,7 +39,10 @@ Create Table TipoCliente
 
 Insert Into TipoCliente(ID_TipoCliente, Nome)
 	Values(1, 'Física'),2, 'Jurídica')
-
+Create Table ClienteEndereco
+(
+    ID_Endereco Int Auto
+)
 
 Create Table Cliente (
 	 ID_Cliente Int Auto_Increment
@@ -49,13 +52,6 @@ Create Table Cliente (
     ,Telefone       Varchar(20)  Not Null
     ,ID_TipoCliente Int          Not Null
     ,CpfCnpj        Varchar(14)  Not Null
-    ,Cep            Varchar(8)
-    ,Endereco       Varchar(100)
-    ,Bairro         Varchar(50)
-    ,Cidade         Varchar(50)
-    ,Estado         Varchar(2)
-    ,Numero         Int
-    ,Complemento    Varchar(50)
     
     ,Primary Key (ID_Cliente)
     ,Constraint FK_ID_TipoCliente Foreign Key (ID_TipoCliente) References TipoCliente (ID_TipoCliente)
