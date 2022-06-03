@@ -4,8 +4,10 @@
  */
 package Entidades;
 
+import Funcoes.Util;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -42,7 +44,7 @@ public class ServicoDeCep {
             Endereco endereco = gson.fromJson(jsonEmString, Endereco.class);
                 
             return endereco;
-        } catch (Exception e) {
+        } catch (IOException | RuntimeException e) {
             throw new Exception("Erro: " + e);
         }
     }
