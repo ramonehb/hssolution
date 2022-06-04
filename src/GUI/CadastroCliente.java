@@ -3,7 +3,7 @@ package GUI;
 import DAL.ClienteDAL;
 import DAL.UsuarioDAL;
 import Entidades.Cliente;
-import Entidades.Endereco;
+import Entidades.EnderecoCliente;
 import Entidades.ServicoDeCep;
 import Jm.JMascara;
 import java.sql.ResultSet;
@@ -350,20 +350,19 @@ public class CadastroCliente extends javax.swing.JFrame {
             cliente.setTelefone(jTextTelefone.getText());
             cliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
             cliente.setCpfCnpj(jTextCpfCnpj.getText());
-            Endereco endereco = new Endereco();
-            endereco.setLocalidade(jTextCidade.getText());
-            endereco.setBairro(jTextBairro.getText());
+            EnderecoCliente endereco = new EnderecoCliente();
+            endereco.setIdCliente(cliente.getIdCliente());
             endereco.setCep(jFormattedCep.getText());
-            endereco.setLogradouro(jTextEndereco.getText());
+            endereco.setBairro(jTextBairro.getText());
+            endereco.setEndereco(jTextEndereco.getText());
             endereco.setUf(jTextEstado.getText());
-            endereco.setNumero(jTextNumero.getText());
+            endereco.setNumero(Integer.parseInt(jTextNumero.getText()));
             endereco.setComplemento(jTextComplemento.getText());
-            cliente.setEndereco(endereco);
-            
         
             ClienteDAL clienteDAL = new ClienteDAL();
-            
-            if(clienteDAL.criarCliente(cliente)){
+            endereco.setIdCliente(clienteDAL.criarCliente(cliente));
+            if(endereco.getIdCliente() != 0){
+                clienteDAL.criarEndereco(endereco);
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
                 setVisible(false);
             }
@@ -380,15 +379,15 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void jFormattedCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedCepActionPerformed
         try {
-            Endereco endereco = ServicoDeCep.buscaEnderecoPelo(jFormattedCep.getText());
+            EnderecoCliente endereco = ServicoDeCep.buscaEnderecoPelo(jFormattedCep.getText());
             
-            if(endereco.getLogradouro() == null && endereco.getLocalidade() == null && endereco.getUf() == null && endereco.getBairro() == null){
+            if(endereco.getEndereco()== null && endereco.getCidade() == null && endereco.getUf() == null && endereco.getBairro() == null){
                 JOptionPane.showMessageDialog(null,"CEP inválido!","Atenção", JOptionPane.CANCEL_OPTION);
                 return;
             }
             
-            jTextEndereco.setText(endereco.getLogradouro());
-            jTextCidade.setText(endereco.getLocalidade());
+            jTextEndereco.setText(endereco.getEndereco());
+            jTextCidade.setText(endereco.getCidade());
             jTextBairro.setText(endereco.getBairro());
             jTextEstado.setText(endereco.getUf());
             

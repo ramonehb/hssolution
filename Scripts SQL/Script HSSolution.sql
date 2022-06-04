@@ -61,8 +61,8 @@ Create Table ClienteEndereco
     ,ID_Cliente 	Int Not Null
     ,Cep			Varchar(8)
     ,Endereco 		Varchar(100)
-    ,Bairro			Varchar(50)
-    ,Estado			Varchar(2)
+    ,Bairro		Varchar(50)
+    ,Uf			Varchar(2)
     ,Numero 		Int
     ,Complemento	Varchar(50)
     

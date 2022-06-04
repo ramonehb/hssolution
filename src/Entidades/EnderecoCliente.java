@@ -4,14 +4,22 @@ package Entidades;
  *
  * @author Humberto Ramone
  */
-public class Endereco {
+public class EnderecoCliente {
+    private int IdCliente;
     private String Cep;
     private String logradouro;
     private String bairro;
-    private String localidade; //cidade
+    private String localidade;
     private String uf;
-    private String complemento;
-    private String numero;
+    private String Complemento;
+    private int Numero;
+    
+    public int getIdCliente(){
+        return IdCliente;
+    }
+    public void setIdCliente(int id){
+        this.IdCliente = id;
+    }
     
     public String getCep(){
         return this.Cep;
@@ -21,11 +29,11 @@ public class Endereco {
         this.Cep = cep;
     }
     
-    public String getLogradouro(){
+    public String getEndereco(){
         return this.logradouro;
     }
     
-    public void setLogradouro(String endereco){
+    public void setEndereco(String endereco){
         this.logradouro = endereco;
     }
     
@@ -36,13 +44,13 @@ public class Endereco {
     public void setBairro(String bairro){
         this.bairro = bairro;
     }
-    
-    public String getLocalidade(){
+       
+    public String getCidade(){
         return this.localidade;
     }
     
-    public void setLocalidade(String localidade){
-        this.localidade = localidade;
+    public void setCidade(String cidade){
+        this.localidade = cidade;
     }
     
     public String getUf(){
@@ -54,18 +62,18 @@ public class Endereco {
     }
     
     public String getComplemento(){
-        return this.complemento;
+        return this.Complemento;
     }
     
     public void setComplemento(String complemento){
-        this.complemento = complemento;
+        this.Complemento = complemento;
     }
     
-    public String getNumero(){
-        return this.numero;
+    public int getNumero(){
+        return this.Numero;
     }
     
-    public void setNumero(String numero){
-        this.numero = numero;
+    public void setNumero(int numero){
+        this.Numero = numero;
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import Funcoes.Util;
@@ -11,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +19,7 @@ public class ServicoDeCep {
     // Codigo de sucesso da requisição
     static int codigoSucesso = 200;
     
-    public static Endereco buscaEnderecoPelo(String cep) throws Exception{
+    public static EnderecoCliente buscaEnderecoPelo(String cep) throws Exception{
         String urlParaChamada = webService + cep + "/json";
         
         try {
@@ -41,7 +36,7 @@ public class ServicoDeCep {
             String jsonEmString = Util.converteJsonEmString(resposta);
                 
             Gson gson = new Gson();
-            Endereco endereco = gson.fromJson(jsonEmString, Endereco.class);
+            EnderecoCliente endereco = gson.fromJson(jsonEmString, EnderecoCliente.class);
                 
             return endereco;
         } catch (IOException | RuntimeException e) {

@@ -15,15 +15,10 @@ public class Cliente {
     private String Telefone;
     private int idTipoCliente;
     private String CpfCnpj;
-    private Endereco Endereco;
     
     public Cliente(){
     }
-    
-    public Cliente(Endereco endereco){
-        this.Endereco = new Endereco();
-    }
-    
+       
     public int getIdCliente(){
         return this.ID_Cliente;
     }
@@ -72,11 +67,4 @@ public class Cliente {
     public void setCpfCnpj(String cpfCnpj){
         this.CpfCnpj = cpfCnpj;
     }    
-    
-    public Endereco getEndereco(){
-        return this.Endereco;
-    }
-    public void setEndereco(Endereco endereco){
-        this.Endereco = endereco;
-    }
 }
