@@ -19,7 +19,7 @@ public class ServicoDeCep {
     // Codigo de sucesso da requisição
     static int codigoSucesso = 200;
     
-    public static EnderecoCliente buscaEnderecoPelo(String cep) throws Exception{
+    public static Endereco buscaEnderecoPelo(String cep) throws Exception{
         String urlParaChamada = webService + cep + "/json";
         
         try {
@@ -36,7 +36,7 @@ public class ServicoDeCep {
             String jsonEmString = Util.converteJsonEmString(resposta);
                 
             Gson gson = new Gson();
-            EnderecoCliente endereco = gson.fromJson(jsonEmString, EnderecoCliente.class);
+            Endereco endereco = gson.fromJson(jsonEmString, Endereco.class);
                 
             return endereco;
         } catch (IOException | RuntimeException e) {

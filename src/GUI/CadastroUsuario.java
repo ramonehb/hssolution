@@ -1,7 +1,6 @@
 package GUI;
 
 import DAL.UsuarioDAL;
-import Entidades.Sessao.Session;
 import Entidades.TipoUsuario;
 import Entidades.Usuario;
 import Jm.JMascara;
@@ -13,14 +12,24 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author Felipe And Humberto
+ * @author (Interface)Felipe And Humberto(Logica e ações)
  */
-public class CadastroUsuario extends javax.swing.JFrame {
+public final class CadastroUsuario extends javax.swing.JFrame {
     public CadastroUsuario() {
         initComponents();
         setLocationRelativeTo(null);
-        listaTipoProduto();
+        listaTipoUsuario();
+        jTextIdUsuario.setVisible(false);
     }
+    public CadastroUsuario(int idUsuario){
+        initComponents();
+        setLocationRelativeTo(null);
+        listaTipoUsuario();
+        carregaUsuario(idUsuario);
+        jTextIdUsuario.setVisible(false);
+        jButtonFinalizar.setText("Atualizar");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,6 +53,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jComboBoxTipoProduto = new javax.swing.JComboBox<>();
         jTextTelefone = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
+        jTextIdUsuario = new javax.swing.JTextField();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -145,6 +155,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        jTextIdUsuario.setText("id");
+        jTextIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextIdUsuarioKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,10 +180,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
@@ -187,8 +209,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,8 +254,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
-       boolean retorno = ValidaCadastro();
        try {
+            boolean retorno = ValidaCadastro();
             if(retorno){
                 Usuario usuario = new Usuario();
                 TipoUsuario tipoUsuario = new TipoUsuario();
@@ -237,14 +264,22 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 usuario.setSenha(jTextSenha.getText());
                 usuario.setEmail(jTextEmail.getText());
                 usuario.setTelefone(jTextTelefone.getText());
-                tipoUsuario.setIdTipoUsuario(jComboBoxTipoProduto.getSelectedItem().toString() == "Administrador" ? 1 : 2);
+                tipoUsuario.setIdTipoUsuario("Administrador".equals(jComboBoxTipoProduto.getSelectedItem().toString()) ? 1 : 2);
                 usuario.setTipoUsuario(tipoUsuario);
                 usuario.setFlHabilitado(true);
            
                 UsuarioDAL usuarioDAL = new UsuarioDAL();
-                if (usuarioDAL.criarUsuario(usuario)){
-                    JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                    setVisible(false);
+                if ("Atualizar".equals(jButtonFinalizar.getText())){
+                    usuario.setIdUsuario(Integer.parseInt(jTextIdUsuario.getText()));
+                    usuarioDAL.atualizarUsuario(usuario);
+                        JOptionPane.showMessageDialog(null,"Usuário atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                        setVisible(false);
+                        new Usuarios().setVisible(true);
+                }else {
+                    if (usuarioDAL.criarUsuario(usuario)){
+                        JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                        setVisible(false);
+                    }   
                 }
             }   
        }catch (HeadlessException | SQLException e){
@@ -252,7 +287,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
     
-    public void listaTipoProduto(){
+    public void listaTipoUsuario(){
         try {
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             ResultSet res = usuarioDAL.listaTipoUsuario();
@@ -262,6 +297,24 @@ public class CadastroUsuario extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void carregaUsuario(int id){
+        UsuarioDAL dal = new UsuarioDAL();
+        Usuario u = new Usuario();
+        try {
+            u = dal.listarUsuarios().get(id);
+            jTextIdUsuario.setText(Integer.toString(u.getIdUsuario()));
+            jTextNome.setText(u.getNome());
+            jTextLogin.setText(u.getLogin());
+            jTextSenha.setText(u.getSenha());
+            jTextConfSenha.setText(u.getSenha());
+            jTextEmail.setText(u.getEmail());
+            jTextTelefone.setText(u.getTelefone());
+            jComboBoxTipoProduto.setSelectedIndex(u.getTipoUsuario().getIdTipoUsuario());
+        } catch (SQLException ex) {
+            
         }
     }
     
@@ -364,6 +417,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextEmailActionPerformed
 
+    private void jTextIdUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextIdUsuarioKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +472,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JPasswordField jTextConfSenha;
     private javax.swing.JTextField jTextEmail;
+    private javax.swing.JTextField jTextIdUsuario;
     private javax.swing.JTextField jTextLogin;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JPasswordField jTextSenha;

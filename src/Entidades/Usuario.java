@@ -17,7 +17,7 @@ public class Usuario {
     
     public Usuario(){}
     
-    public Usuario(TipoUsuario endereco){
+    public Usuario(TipoUsuario tipoUsuario){
         this.TipoUsuario = new TipoUsuario();
     }
     

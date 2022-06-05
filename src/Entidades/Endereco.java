@@ -4,8 +4,7 @@ package Entidades;
  *
  * @author Humberto Ramone
  */
-public class EnderecoCliente {
-    private int IdCliente;
+public class Endereco {
     private String Cep;
     private String logradouro;
     private String bairro;
@@ -13,15 +12,8 @@ public class EnderecoCliente {
     private String uf;
     private String Complemento;
     private int Numero;
-    
-    public int getIdCliente(){
-        return IdCliente;
-    }
-    public void setIdCliente(int id){
-        this.IdCliente = id;
-    }
-    
-    public String getCep(){
+
+     public String getCep(){
         return this.Cep;
     }
     
@@ -76,4 +68,6 @@ public class EnderecoCliente {
     public void setNumero(int numero){
         this.Numero = numero;
     }
+    
+   
 }

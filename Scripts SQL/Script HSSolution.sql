@@ -1,4 +1,5 @@
 
+Drop Database HSSolution
 
 Create Database HSSolution
 
@@ -39,7 +40,6 @@ Create Table TipoCliente
 
 Insert Into TipoCliente(ID_TipoCliente, Nome)
 	Values(1, 'Física'),(2, 'Jurídica')
-    
 
 Create Table Cliente (
 	 ID_Cliente Int Auto_Increment
@@ -49,16 +49,6 @@ Create Table Cliente (
     ,Telefone       Varchar(20)  Not Null
     ,ID_TipoCliente Int          Not Null
     ,CpfCnpj        Varchar(14)  Not Null
-    
-    ,Primary Key (ID_Cliente)
-    ,Constraint FK_ID_TipoCliente Foreign Key (ID_TipoCliente) References TipoCliente (ID_TipoCliente)
-    
-)
-
-Create Table ClienteEndereco
-(
-     ID_Endereco Int Auto_Increment
-    ,ID_Cliente 	Int Not Null
     ,Cep			Varchar(8)
     ,Endereco 		Varchar(100)
     ,Bairro		Varchar(50)
@@ -66,8 +56,8 @@ Create Table ClienteEndereco
     ,Numero 		Int
     ,Complemento	Varchar(50)
     
-    ,Primary Key (ID_Endereco)
-    ,Constraint FK_ID_Cliente Foreign Key (ID_Cliente) References Cliente (ID_Cliente)
+    ,Primary Key (ID_Cliente)
+    ,Constraint FK_ID_TipoCliente Foreign Key (ID_TipoCliente) References TipoCliente (ID_TipoCliente)
 )
 
 Create Table TipoProduto 
@@ -126,9 +116,9 @@ Create Table Pedido
 	,VL_Total		Float
 
 	,Primary Key  (ID_Pedido)
-	,Constraint FK_ID_PedidoStatus          Foreign Key (ID_PedidoStatus)   References PedidoStatus (ID_PedidoStatus)
+	,Constraint FK_ID_PedidoStatus   Foreign Key (ID_PedidoStatus)   References PedidoStatus (ID_PedidoStatus)
 	,Constraint FK_ID_Cliente_Pedido        Foreign Key (ID_Cliente)        References Cliente(ID_Cliente)
-	,Constraint FK_ID_FormaPagamento        Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
+	,Constraint FK_ID_FormaPagamento Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
 )
 
 Create Table ItemPedido
@@ -144,8 +134,4 @@ Create Table ItemPedido
 	,Constraint FK_ID_Produto    Foreign Key(ID_Produto) References Produto (ID_Produto)
 )
 
-
-
-
-    
     

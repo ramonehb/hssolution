@@ -70,28 +70,23 @@ public class UsuarioDAL extends Conexao {
         return sucesso;
     }
 
-    public boolean atualizarUsuario(Usuario usuario) throws SQLException {
-        boolean sucesso;
+    public void atualizarUsuario(Usuario usuario) throws SQLException {
         try {
             conn = Conexao.abreConexao();
-            query = conn.prepareStatement("Update Usuario Set Nome = ?, Login = ?, Senha = ?, Email = ?, Telefone = ?, FL_Habilitado = ?, ID_TipoUsuario = ? Where ID_Usuario = ?");
+            query = (PreparedStatement) conn.prepareStatement("Update Usuario Set Nome = ?, Login = ?, Senha = ?, Email = ?, Telefone = ?, FL_Habilitado = ?, ID_TipoUsuario = ? Where ID_Usuario = ?");
             query.setString(1, usuario.getNome());
             query.setString(2, usuario.getLogin());
             query.setString(3, usuario.getSenha());
             query.setString(4, usuario.getEmail());
             query.setString(5,  usuario.getTelefone());
             query.setBoolean(6, usuario.getFlHabilitado());
-            query.setInt(7, usuario.getIdUsuario());
-            query.setInt(8, usuario.getTipoUsuario().getIdTipoUsuario());
+            query.setInt(7, usuario.getTipoUsuario().getIdTipoUsuario());
+            query.setInt(8, usuario.getIdUsuario());
             query.execute();
-            sucesso = true;
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
-            sucesso = false;
         }
-        
-        return sucesso;
     }
     
     public ArrayList<Usuario> listarUsuarios() throws SQLException {
