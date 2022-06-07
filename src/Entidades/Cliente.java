@@ -13,11 +13,15 @@ public class Cliente {
     private String Email;
     private Date DT_Nasc;
     private String Telefone;
-    private int idTipoCliente;
+    private TipoCliente TipoCliente;
     private String CpfCnpj;
     private Endereco Enderco;
     
     public Cliente(){}
+    
+    public Cliente(TipoCliente tipoCliente){
+        this.TipoCliente = new TipoCliente();
+    }
     
     public Cliente(Endereco endereco){
         this.Enderco = new Endereco();
@@ -58,11 +62,12 @@ public class Cliente {
         this.Telefone = telefone;
     }
     
-    public int getIdTipoCliente(){
-        return this.idTipoCliente;
+    public TipoCliente getTipoCliente(){
+        return TipoCliente;
     }
-    public void setIdTipoCliente(int idTipoCliente){
-        this.idTipoCliente = idTipoCliente;
+    
+    public void setTipoCliente(TipoCliente tipoCliente){
+        this.TipoCliente = tipoCliente;
     }
     
     public String getCpfCnpj(){
