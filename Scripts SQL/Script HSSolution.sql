@@ -12,7 +12,7 @@ Create Table TipoUsuario
     ,Primary Key(ID_TipoUsuario)
 )
 
-Insert Into TipoUsuario(ID_TipoUsuario, Nome) 
+Insert Into TipoUsuario
     Values (1, 'Administrador'), (2, 'Atendente')
 
 Create Table Usuario 
@@ -38,7 +38,7 @@ Create Table TipoCliente
     ,Primary Key (ID_TipoCliente)
 )
 
-Insert Into TipoCliente(ID_TipoCliente, Nome)
+Insert Into TipoCliente
 	Values(1, 'Física'),(2, 'Jurídica')
 
 Create Table Cliente (
