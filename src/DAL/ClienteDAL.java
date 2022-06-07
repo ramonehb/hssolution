@@ -3,7 +3,6 @@ package DAL;
 import Entidades.Cliente;
 import Entidades.Endereco;
 import Entidades.TipoCliente;
-import Entidades.Usuario;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +23,7 @@ public class ClienteDAL extends Conexao{
         boolean sucesso;
         try {
             conn = Conexao.abreConexao();
-            query = conn.prepareStatement("Insert Into Cliente (Nome, Email, DT_Nasc, Telefone, ID_TipoCliente, CpfCnpj, Cep, Endereco, Bairro, Uf, Numero, Complemento) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+            query = conn.prepareStatement("Insert Into Cliente (Nome, Email, DT_Nasc, Telefone, ID_TipoCliente, CpfCnpj, Cep, Endereco, Bairro, Cidade, Uf, Numero, Complemento) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
             query.setString(1, cliente.getNome());
             query.setString(2, cliente.getEmail());
             query.setDate(3, new java.sql.Date(cliente.getDataNascimento().getTime()));
@@ -33,10 +32,11 @@ public class ClienteDAL extends Conexao{
             query.setString(6, cliente.getCpfCnpj().replace("-", "").replace("/","").replace(".",""));
             query.setString(7, cliente.getEndereco().getCep().replace("-",""));
             query.setString(8, cliente.getEndereco().getEndereco());
-            query.setString(9, cliente.getEndereco().getBairro());
-            query.setString(10, cliente.getEndereco().getUf());
-            query.setInt(11, cliente.getEndereco().getNumero());
-            query.setString(12, cliente.getEndereco().getComplemento());
+            query.setString(9, cliente.getEndereco().getCidade());
+            query.setString(10, cliente.getEndereco().getBairro());
+            query.setString(11, cliente.getEndereco().getUf());
+            query.setInt(12, cliente.getEndereco().getNumero());
+            query.setString(13, cliente.getEndereco().getComplemento());
             query.execute();
             
             sucesso = true;            

@@ -394,10 +394,12 @@ public final class CadastroCliente extends javax.swing.JFrame {
             cliente.setDataNascimento(dtNasc);
             cliente.setTelefone(jTextTelefone.getText());
             tpCliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
+            cliente.setTipoCliente(tpCliente);
             cliente.setCpfCnpj(jTextCpfCnpj.getText());
             Endereco endereco = new Endereco();
             endereco.setCep(jFormattedCep.getText());
             endereco.setBairro(jTextBairro.getText());
+            endereco.setCidade(jTextCidade.getText());
             endereco.setEndereco(jTextEndereco.getText());
             endereco.setUf(jTextEstado.getText());
             endereco.setNumero(Integer.parseInt(jTextNumero.getText()));
