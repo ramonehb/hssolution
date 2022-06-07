@@ -23,6 +23,16 @@ public final class CadastroCliente extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         listaTipoCliente();
+        jTextIdCliente.setVisible(false);
+    }
+    
+    public CadastroCliente(int idCliente){
+        initComponents();
+        setLocationRelativeTo(null);
+        listaTipoCliente();
+        carregaUsuario(idCliente);
+        jTextIdCliente.setVisible(false);
+        jButtonCadastrar.setText("Atualizar");
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +67,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
         jLabelComplemento = new javax.swing.JLabel();
         jTextComplemento = new javax.swing.JTextField();
         jTextNumero = new javax.swing.JFormattedTextField();
+        jTextIdCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Cliente");
@@ -168,6 +179,8 @@ public final class CadastroCliente extends javax.swing.JFrame {
 
         jTextNumero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        jTextIdCliente.setText("id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,7 +225,9 @@ public final class CadastroCliente extends javax.swing.JFrame {
                                 .addComponent(jTextComplemento, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDataNascimento)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDataNascimento))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(197, 197, 197))))
@@ -226,7 +241,9 @@ public final class CadastroCliente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(14, 14, 14)
+                .addComponent(jTextIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
                     .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,8 +320,39 @@ public final class CadastroCliente extends javax.swing.JFrame {
         jTextTelefone.setText(JMascara.GetJmascaraFone(jTextTelefone.getText()));
     }//GEN-LAST:event_jTextTelefoneKeyReleased
 
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        
+    private void carregaUsuario(int id){
+        ClienteDAL clienteDAL = new ClienteDAL();
+        Cliente c = new Cliente();
+        try {
+            c = clienteDAL.listarClientes().get(id);
+            jTextIdCliente.setText(Integer.toString(c.getIdCliente()));
+            jTextNome.setText(c.getNome());
+            jTextEmail.setText(c.getEmail());
+            jTextDataNascimento.setText(c.getDataNascimento().toString());
+            jTextTelefone.setText(c.getTelefone());
+            jCbTpCliente.setSelectedIndex(c.getTipoCliente().getIdTipoCliente());
+            jTextCpfCnpj.setText(c.getCpfCnpj());
+            jFormattedCep.setText(c.getEndereco().getCep());
+            jTextEndereco.setText(c.getEndereco().getEndereco());
+            jTextBairro.setText(c.getEndereco().getBairro());
+            jTextEstado.setText(c.getEndereco().getUf());
+            jtext.setText(c.getEndereco().getCep());
+            
+            
+            
+            jTextIdUsuario.setText(Integer.toString(u.getIdUsuario()));
+            jTextNome.setText(u.getNome());
+            jTextLogin.setText(u.getLogin());
+            jTextSenha.setText(u.getSenha());
+            jTextConfSenha.setText(u.getSenha());
+            jTextEmail.setText(u.getEmail());
+            jTextTelefone.setText(u.getTelefone());
+            jComboBoxTipoProduto.setSelectedIndex(u.getTipoUsuario().getIdTipoUsuario());
+        } catch (Exception e) {
+        }
+    }
+    
+    private boolean ValidaCadastro(){
         String mensagem = "";
         int erro = 0;
         
@@ -335,10 +383,16 @@ public final class CadastroCliente extends javax.swing.JFrame {
         
         if(erro > 0){
             JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
-            return;
         }
         
+        return erro == 0;
+    }
+    
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+
         try {
+            boolean retorno = ValidaCadastro();
+            if(retorno){
             SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
             Date dtNasc = dt.parse(jTextDataNascimento.getText());
             
@@ -359,10 +413,19 @@ public final class CadastroCliente extends javax.swing.JFrame {
             cliente.setEndereco(endereco);
         
             ClienteDAL clienteDAL = new ClienteDAL();
-            
-            if(clienteDAL.criarCliente(cliente)){
+            if("Atualizar".equals(jButtonCadastrar.getText())){
+                cliente.setIdCliente(Integer.parseInt(jTextIdCliente.getText()));
+                clienteDAL.atualizarCliente(cliente);
+                    JOptionPane.showMessageDialog(null,"Cliente atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new Clientes().setVisible(true);
+            }
+            else{
+                if(clienteDAL.criarCliente(cliente)){
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
                 setVisible(false);
+                }
+            }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Contate o administrador!","Atenção", JOptionPane.CANCEL_OPTION);
@@ -468,6 +531,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextEndereco;
     private javax.swing.JTextField jTextEstado;
+    private javax.swing.JTextField jTextIdCliente;
     private javax.swing.JTextField jTextNome;
     private javax.swing.JFormattedTextField jTextNumero;
     private javax.swing.JTextField jTextTelefone;

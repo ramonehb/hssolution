@@ -36,6 +36,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -56,6 +57,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelLoginUser.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
 
         jMenu7.setText("Visualizar");
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem6.setText("Visualizar usuários");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +66,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu7.add(jMenuItem6);
+
+        jMenuItem9.setText("Visualizar clientes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem9);
 
         jMenuBar1.add(jMenu7);
 
@@ -181,6 +191,10 @@ public class TelaInicial extends javax.swing.JFrame {
         new CadastroProduto().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        new Clientes().setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,5 +246,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
