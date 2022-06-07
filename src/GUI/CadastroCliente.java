@@ -4,6 +4,7 @@ import DAL.ClienteDAL;
 import Entidades.Cliente;
 import Entidades.Endereco;
 import Entidades.ServicoDeCep;
+import Entidades.TipoCliente;
 import Jm.JMascara;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -336,18 +337,8 @@ public final class CadastroCliente extends javax.swing.JFrame {
             jTextEndereco.setText(c.getEndereco().getEndereco());
             jTextBairro.setText(c.getEndereco().getBairro());
             jTextEstado.setText(c.getEndereco().getUf());
-            jtext.setText(c.getEndereco().getCep());
+            jTextNumero.setText(Integer.toString(c.getEndereco().getNumero()));
             
-            
-            
-            jTextIdUsuario.setText(Integer.toString(u.getIdUsuario()));
-            jTextNome.setText(u.getNome());
-            jTextLogin.setText(u.getLogin());
-            jTextSenha.setText(u.getSenha());
-            jTextConfSenha.setText(u.getSenha());
-            jTextEmail.setText(u.getEmail());
-            jTextTelefone.setText(u.getTelefone());
-            jComboBoxTipoProduto.setSelectedIndex(u.getTipoUsuario().getIdTipoUsuario());
         } catch (Exception e) {
         }
     }
@@ -397,11 +388,12 @@ public final class CadastroCliente extends javax.swing.JFrame {
             Date dtNasc = dt.parse(jTextDataNascimento.getText());
             
             Cliente cliente = new Cliente();
+            TipoCliente tpCliente = new TipoCliente();
             cliente.setNome(jTextNome.getText());
             cliente.setEmail(jTextEmail.getText());
             cliente.setDataNascimento(dtNasc);
             cliente.setTelefone(jTextTelefone.getText());
-            cliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
+            tpCliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
             cliente.setCpfCnpj(jTextCpfCnpj.getText());
             Endereco endereco = new Endereco();
             endereco.setCep(jFormattedCep.getText());
