@@ -105,11 +105,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTextLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextLoginActionPerformed(evt);
-            }
-        });
         jTextLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextLoginKeyTyped(evt);
@@ -128,11 +123,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTextEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextEmailActionPerformed(evt);
-            }
-        });
         jTextEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextEmailKeyTyped(evt);
@@ -160,11 +150,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
         });
 
         jTextIdUsuario.setText("id");
-        jTextIdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextIdUsuarioKeyTyped(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,10 +390,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextEmailKeyTyped
     
-    private void jTextLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextLoginActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentShown
@@ -420,14 +401,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextEmailActionPerformed
-
-    private void jTextIdUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdUsuarioKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextIdUsuarioKeyTyped
 
     /**
      * @param args the command line arguments

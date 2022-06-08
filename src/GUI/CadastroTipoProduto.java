@@ -54,11 +54,6 @@ public class CadastroTipoProduto extends javax.swing.JFrame {
                 jButtonSalvarActionPerformed(evt);
             }
         });
-        jButtonSalvar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jButtonSalvarKeyTyped(evt);
-            }
-        });
 
         jButtonCancelar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -109,10 +104,6 @@ public class CadastroTipoProduto extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldNomeNovoProdKeyTyped
-
-    private void jButtonSalvarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSalvarKeyTyped
-        
-    }//GEN-LAST:event_jButtonSalvarKeyTyped
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {

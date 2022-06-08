@@ -3,6 +3,7 @@ package GUI;
 import DAL.UsuarioDAL;
 import Entidades.Sessao;
 import Entidades.Usuario;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -156,7 +157,8 @@ public class Usuarios extends javax.swing.JFrame {
             Usuario usuario = dal.listarUsuarios().get(index);
             dal.deletarUsuario(usuario.getIdUsuario());
             carregaTabelaUsuarios();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
@@ -229,8 +231,8 @@ public class Usuarios extends javax.swing.JFrame {
                 u.getFlHabilitado() ? "Habilitado" : "Desativado"
             });
         }
-        } catch (Exception e) {
-            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

@@ -159,7 +159,8 @@ public class Produtos extends javax.swing.JFrame {
             Produto produto = dal.listarProdutos().get(index);
             dal.deletarProduto(produto.getIdProduto());
             carregaTabelaProdutos();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
