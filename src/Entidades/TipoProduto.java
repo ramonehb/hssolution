@@ -9,5 +9,20 @@ package Entidades;
  * @author Felipe
  */
 public class TipoProduto {
+    private int IdTipoProduto;
+    private String Nome;
     
+    public int getIdTipoProduto(){
+        return IdTipoProduto;
+    }
+    public void setIdTipoProduto(int id){
+        this.IdTipoProduto = id;
+    }
+    
+    public String getNome(){
+        return Nome;
+    }
+    public void setNome(String nome){
+        this.Nome = nome;
+    }
 }

@@ -4,7 +4,11 @@
  */
 package GUI;
 
+import DAL.TipoProdutoDAL;
+import Entidades.TipoProduto;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -98,17 +102,26 @@ public class CadastroTipoProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarKeyTyped
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        int erro = 0;
+        try {
+           int erro = 0;
         
-        if (jTextFieldNomeNovoProd.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Digite o tipo do produto!", "Atenção", JOptionPane.CANCEL_OPTION);
-            erro++;
-        }
+            if (jTextFieldNomeNovoProd.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Digite o tipo do produto!", "Atenção", JOptionPane.CANCEL_OPTION);
+                erro++;
+            }
     
-       if(erro == 0){
-           setVisible(false);
-       }
-       
+            if(erro == 0){
+                TipoProdutoDAL tipoDAL = new TipoProdutoDAL();
+                TipoProduto tipoProduto = new TipoProduto();
+                tipoProduto.setNome(jTextFieldNomeNovoProd.getText());
+                if (tipoDAL.criarTipoProduto(tipoProduto)){
+                    setVisible(false);
+                    new CadastroProduto().setVisible(true);
+                }
+            } 
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+ e.getMessage(),"Atenção", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**

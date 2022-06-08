@@ -4,7 +4,17 @@
  */
 package GUI;
 
+import DAL.ProdutoDAL;
+import DAL.UsuarioDAL;
+import Entidades.Produto;
+import Entidades.Sessao.Session;
+import Entidades.TipoProduto;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -23,6 +33,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     public CadastroProduto() {
         initComponents();
         setLocationRelativeTo(null);
+        listaTipoUsuario();
     }
 
     /**
@@ -95,7 +106,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        jComboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         jButtonNovoTipo.setText("Novo");
         jButtonNovoTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -260,22 +271,42 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jButtonNovoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoTipoActionPerformed
         new CadastroTipoProduto().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonNovoTipoActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
-        boolean retorno = ValidaCadastro();
+        try {
+            boolean retorno = ValidaCadastro();
        
-       if(retorno){
-           new Login().setVisible(true);
-           setVisible(false);
-       }
+            if(retorno){
+                Produto produto = new Produto();
+                TipoProduto tipoProduto = new TipoProduto();
+                produto.setIdUsuarioCadastro(Session.ID_Usuario);
+                produto.setNome(jTextNomeProd.getText());
+                produto.setVL_Pago(Double.parseDouble(jTextValorPago.getText()));
+                produto.setVL_Venda(Double.parseDouble(jTextValorVenda.getText()));
+                produto.setQuantidade(Integer.parseInt(jTextQuantidade.getText()));
+                //tipoProduto.setIdTipoProduto();
+                //produto.setTipoProduto(tipoProduto);
+           
+                ProdutoDAL produtoDAL = new ProdutoDAL();
+                if(produtoDAL.criarProduto(produto)){
+                    JOptionPane.showMessageDialog(null,"Produto cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                } else {
+               
+                }
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+ e.getMessage(),"Atenção", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-        private boolean ValidaCadastro(){
+    private boolean ValidaCadastro(){
         String mensagem = "";
         int erro = 0;
         
@@ -304,7 +335,20 @@ public class CadastroProduto extends javax.swing.JFrame {
        
        return erro == 0;
 
+    }
+    
+    public void listaTipoUsuario(){
+        try {
+            ProdutoDAL produtoDAL = new ProdutoDAL();
+            ResultSet res = produtoDAL.listaTipoProduto();
+            
+            while (res.next()){
+                jComboTipo.addItem(res.getString(2));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
         
     
     
