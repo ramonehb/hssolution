@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/ProjetoFaculdade/hssolution/src/GUI/Login.java</file>
             <file>file:/C:/ProjetoFaculdade/hssolution/src/Entidades/Usuario.java</file>
             <file>file:/C:/ProjetoFaculdade/hssolution/src/GUI/CadastroUsuario.java</file>
@@ -14,6 +15,16 @@
             <file>file:/C:/ProjetoFaculdade/hssolution/src/GUI/CadastroCliente.java</file>
             <file>file:/C:/ProjetoFaculdade/hssolution/src/Entidades/TipoUsuario.java</file>
             <file>file:/C:/ProjetoFaculdade/hssolution/src/DAL/ClienteDAL.java</file>
+=======
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/Entidades/Produto.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/DAL/ProdutoDAL.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/CadastroProduto.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/Entidades/TipoProduto.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/CadastroUsuario.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/DAL/TipoProdutoDAL.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/DAL/UsuarioDAL.java</file>
+            <file>file:/C:/Users/55119/Documents/NetBeansProjects/hssolution/hssolution/src/GUI/CadastroTipoProduto.java</file>
+>>>>>>> CadastroProduto
         </group>
     </open-files>
 </project-private>

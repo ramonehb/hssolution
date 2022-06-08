@@ -27,7 +27,8 @@ Create Table Usuario
     ,ID_TipoUsuario Int
 
     ,Primary Key (ID_Usuario)
-    ,Constraint UC_Usuario Unique (Login,Email)
+    ,Constraint UC_Usuario Unique (Login)
+    ,Constraint UC_Email Unique (Email)
     ,Constraint FK_ID_TipoUsuario Foreign Key (ID_TipoUsuario) References TipoUsuario (ID_TipoUsuario)
 )
 
@@ -134,5 +135,16 @@ Create Table ItemPedido
 	,Constraint FK_ID_Pedido     Foreign Key (ID_Pedido) References Pedido (ID_Pedido)
 	,Constraint FK_ID_Produto    Foreign Key(ID_Produto) References Produto (ID_Produto)
 )
+
+--Visão da tela de produto
+Select   P.ID_Produto
+        ,P.Nome
+        ,TP.Categoria
+        ,P.VL_Pago
+        ,P.VL_Venda
+        ,P.Quantidade
+	From Produto As P
+    Inner Join TipoProduto as TP
+        On P.ID_TipoProduto = TP.ID_TipoProduto
 
     

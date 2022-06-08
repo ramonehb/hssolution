@@ -1,10 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
-import java.awt.Toolkit;
+import DAL.ProdutoDAL;
+import Entidades.Produto;
+import Entidades.Sessao.Session;
+import Entidades.TipoProduto;
+import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -15,15 +18,48 @@ import javax.swing.text.PlainDocument;
  *
  * @author Felipe
  */
-public class CadastroProduto extends javax.swing.JFrame {
-
+public final class CadastroProduto extends javax.swing.JFrame {
+    
+    Vector<Integer> idTipoProduto = new Vector<>();
     /**
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
         initComponents();
         setLocationRelativeTo(null);
+        listaTipoUsuario();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+        jTextIdProduto.setVisible(false);
     }
+
+    CadastroProduto(int idProduto) {
+        initComponents();
+        setLocationRelativeTo(null);
+        listaTipoUsuario();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+        carregaProduto(idProduto);
+        jButtonFinalizar.setText("Atualizar");
+        jTextIdProduto.setVisible(false);
+    }
+    
+    public void carregaProduto(int id){
+        ProdutoDAL dal =  new ProdutoDAL();
+        Produto p = new Produto();
+        try {
+            p = dal.listarProdutos().get(id);
+            jTextIdProduto.setText(Integer.toString(p.getIdProduto()));
+            jTextNomeProd.setText(p.getNome());
+            jComboTipo.setSelectedIndex(p.getTipoProduto().getIdTipoProduto());
+            jTextQuantidade.setText(Double.toString(p.getQuantidade()).replace(".0", ""));
+            jTextValorPago.setText(Double.toString(p.getVL_Pago()));
+            jTextValorVenda.setText(Double.toString(p.getVL_Venda()));            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +86,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jTextQuantidade = new javax.swing.JTextField();
         jButtonFinalizar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jTextIdProduto = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -72,17 +109,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabelValorVenda.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabelValorVenda.setText("Valor venda:");
 
-        jTextNomeProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNomeProdActionPerformed(evt);
-            }
-        });
-        jTextNomeProd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextNomeProdKeyTyped(evt);
-            }
-        });
-
         jTextValorPago.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextValorPagoKeyTyped(evt);
@@ -95,17 +121,12 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        jComboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         jButtonNovoTipo.setText("Novo");
         jButtonNovoTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNovoTipoActionPerformed(evt);
-            }
-        });
-        jButtonNovoTipo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jButtonNovoTipoKeyTyped(evt);
             }
         });
 
@@ -118,7 +139,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        jButtonFinalizar.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jButtonFinalizar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButtonFinalizar.setText("Finalizar");
         jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +147,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jButtonCancelar.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,42 +160,53 @@ public class CadastroProduto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextQuantidade, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextNomeProd, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextValorPago, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 280, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonNovoTipo))
-                    .addComponent(jLabelCadastroProd)
-                    .addComponent(jTextValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonNovoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextQuantidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                            .addComponent(jTextValorPago, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabelValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextNomeProd)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLabelCadastroProd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jTextIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 10, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonFinalizar)
                 .addGap(47, 47, 47)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
+                .addGap(129, 129, 129))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(10, 10, 10)
                 .addComponent(jLabelCadastroProd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jTextIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,39 +214,27 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addComponent(jButtonNovoTipo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(23, 23, 23)
+                    .addComponent(jLabelNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                    .addComponent(jLabelValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFinalizar))
-                .addGap(33, 33, 33))
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextNomeProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomeProdActionPerformed
-      
-    }//GEN-LAST:event_jTextNomeProdActionPerformed
-
-    private void jButtonNovoTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonNovoTipoKeyTyped
-        
-    }//GEN-LAST:event_jButtonNovoTipoKeyTyped
-
-    private void jTextNomeProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomeProdKeyTyped
-        if(jTextNomeProd.getText().length() >= 50){
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextNomeProdKeyTyped
     
     private void jTextQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextQuantidadeKeyTyped
         if(jTextQuantidade.getText().length() >= 10){
@@ -263,50 +283,96 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoTipoActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
-        boolean retorno = ValidaCadastro();
+        try {
+            boolean retorno = ValidaCadastro();
        
-       if(retorno){
-           new Login().setVisible(true);
-           setVisible(false);
-       }
+            if(retorno){
+                Produto produto = new Produto();
+                TipoProduto tipoProduto = new TipoProduto();
+                produto.setIdUsuarioCadastro(Session.ID_Usuario);
+                produto.setNome(jTextNomeProd.getText());
+                produto.setVL_Pago(Double.parseDouble(jTextValorPago.getText()));
+                produto.setVL_Venda(Double.parseDouble(jTextValorVenda.getText()));
+                produto.setQuantidade(Integer.parseInt(jTextQuantidade.getText()));
+                tipoProduto.setIdTipoProduto(jComboTipo.getSelectedIndex());
+                produto.setTipoProduto(tipoProduto);
+           
+                ProdutoDAL produtoDAL = new ProdutoDAL();
+                if ("Atualizar".equals(jButtonFinalizar.getText())){
+                    produto.setIdProduto(Integer.parseInt(jTextIdProduto.getText()));
+                    produtoDAL.atualizarProduto(produto);
+                    JOptionPane.showMessageDialog(null,"Produto atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new Produtos().setVisible(true);
+                    return;
+                }
+                
+                if(produtoDAL.criarProduto(produto)){
+                    JOptionPane.showMessageDialog(null,"Produto cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new Produtos().setVisible(true);
+                }else {
+                    JOptionPane.showMessageDialog(null,"Produto não cadastrado","Atenção", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+ e.getMessage(),"Atenção", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-        private boolean ValidaCadastro(){
+    private boolean ValidaCadastro(){
         String mensagem = "";
         int erro = 0;
         
         if (jTextNomeProd.getText().equals("")){
-            mensagem += "Digite o nome!\n";
+            mensagem += "Digite o nome.\n";
             erro++;
         }
         
         if (jTextQuantidade.getText().equals("")){
-            mensagem += "Digite a quantidade!\n";
+            mensagem += "Digite a quantidade.\n";
             erro++;
         }
         
         if (jTextValorVenda.getText().equals("")){
-            mensagem += "Digite o valor de venda!\n";
+            mensagem += "Digite o valor de venda.\n";
             erro++;
         }
         
         if (jTextValorPago.getText().equals("")){
-            mensagem += "Digite o valor de compra!\n";
+            mensagem += "Digite o valor de compra.\n";
             erro++;
         }
+        if ("Selecione".equals(jComboTipo.getSelectedItem().toString())){
+            mensagem += "Selecione o tipo do produto.\n";
+            erro++;
+        }
+        
         if (erro  >  0){
            JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.CANCEL_OPTION);
        }       
        
        return erro == 0;
 
-        }
-        
+    }
     
+    public void listaTipoUsuario(){
+        try {
+            ProdutoDAL produtoDAL = new ProdutoDAL();
+            ResultSet res = produtoDAL.listaTipoProduto();
+            while (res.next()){
+                idTipoProduto.addElement(res.getInt(1));
+                jComboTipo.addItem(res.getString(2));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }    
     
     /**
      * @param args the command line arguments
@@ -347,7 +413,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonFinalizar;
     private javax.swing.JButton jButtonNovoTipo;
-    private javax.swing.JComboBox<String> jComboTipo;
+    private javax.swing.JComboBox<Object> jComboTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCadastroProd;
     private javax.swing.JLabel jLabelNomeProd;
@@ -356,6 +422,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelValorVenda;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextIdProduto;
     private javax.swing.JTextField jTextNomeProd;
     private javax.swing.JTextField jTextQuantidade;
     private javax.swing.JTextField jTextValorPago;

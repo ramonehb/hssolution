@@ -3,7 +3,6 @@ package GUI;
 import DAL.UsuarioDAL;
 import Entidades.Sessao.Session;
 import Entidades.Usuario;
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,8 +21,6 @@ public class Login extends javax.swing.JFrame {
         jLabelSenha = new javax.swing.JLabel();
         jTextLogin = new javax.swing.JTextField();
         jButtonEntrar = new javax.swing.JButton();
-        jLabelLoginVal = new javax.swing.JLabel();
-        jLabelSenhaVal = new javax.swing.JLabel();
         jPasswordSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabelEsqueciSenha = new javax.swing.JLabel();
@@ -50,10 +47,6 @@ public class Login extends javax.swing.JFrame {
                 jButtonEntrarActionPerformed(evt);
             }
         });
-
-        jLabelLoginVal.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-
-        jLabelSenhaVal.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
         jPasswordSenha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
@@ -92,10 +85,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabelSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLoginVal)
                     .addComponent(jTextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSenhaVal))
+                    .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,15 +98,11 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
-                .addGap(47, 47, 47)
-                .addComponent(jLabelLoginVal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelLogin)
                     .addComponent(jTextLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(jLabelSenhaVal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelSenha)
                     .addComponent(jPasswordSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,23 +129,13 @@ public class Login extends javax.swing.JFrame {
             if(jTextLogin.getText().length() >= 10 || jTextLogin.getText().length() < 3){
                 mensagem += "Usúario inválido\n";
                 erro++;
-            }else{
-                 jLabelLoginVal.setText("");
             }
         }
         
         if (jPasswordSenha.getText().equals("")){
             mensagem += "Digite a senha!";
             erro++;
-        } else {
-            if(jPasswordSenha.getText().length() >= 10 || jPasswordSenha.getText().length() < 3){
-                mensagem += "Senha inválida\n";
-                erro++;
-            }
-            else{
-                jLabelSenhaVal.setText("");
-            }
-        }
+        } 
         
         if(erro > 0){
             JOptionPane.showMessageDialog(null,mensagem,"Atenção", JOptionPane.CANCEL_OPTION);
@@ -220,9 +197,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelEsqueciSenha;
     private javax.swing.JLabel jLabelLogin;
-    private javax.swing.JLabel jLabelLoginVal;
     private javax.swing.JLabel jLabelSenha;
-    private javax.swing.JLabel jLabelSenhaVal;
     private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JTextField jTextLogin;
     // End of variables declaration//GEN-END:variables

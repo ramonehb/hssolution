@@ -9,15 +9,17 @@ import java.util.Date;
 public class Produto {
     private int ID_Produto;
     private String Nome;
-    private String TipoProduto;
-    //private TipoProduto TipoProduto;
-    //private ID_UsuarioCadastro;
+    private TipoProduto TipoProduto;
+    private int ID_UsuarioCadastro;
     private int Quantidade;
     private double VL_Pago;
     private double VL_Venda;
-    //private Date DT_Cadastro;
             
     public Produto(){}
+    
+    public Produto(TipoProduto tipoProduto){
+        this.TipoProduto = new TipoProduto();
+    }
     
     //Mostrar valor
     public int getIdProduto(){
@@ -34,10 +36,10 @@ public class Produto {
         this.Nome = nome;
     }
     
-    public String getTipoProduto(){
+    public TipoProduto getTipoProduto(){
         return TipoProduto;
     }
-    public void setTipoProduto(String tipoProduto){
+    public void setTipoProduto(TipoProduto tipoProduto){
         this.TipoProduto = tipoProduto;
     }
     
@@ -60,5 +62,12 @@ public class Produto {
     }
     public void setVL_Venda(double vlVenda){
         this.VL_Venda = vlVenda;
+    }
+    
+     public int getIdUsuarioCadastro(){
+        return ID_UsuarioCadastro;
+    }
+    public void setIdUsuarioCadastro(int id){
+        this.ID_UsuarioCadastro = id;
     }
 }
