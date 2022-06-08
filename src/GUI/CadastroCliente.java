@@ -389,43 +389,43 @@ public final class CadastroCliente extends javax.swing.JFrame {
         try {
             boolean retorno = ValidaCadastro();
             if(retorno){
-            SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-            Date dtNasc = dt.parse(jTextDataNascimento.getText());
+                SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+                Date dtNasc = dt.parse(jTextDataNascimento.getText());
 
-            Cliente cliente = new Cliente();
-            TipoCliente tpCliente = new TipoCliente();
-            cliente.setNome(jTextNome.getText());
-            cliente.setEmail(jTextEmail.getText());
-            cliente.setDataNascimento(dtNasc);
-            cliente.setTelefone(jTextTelefone.getText());
-            tpCliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
-            cliente.setTipoCliente(tpCliente);
-            cliente.setCpfCnpj(jTextCpfCnpj.getText());
-            Endereco endereco = new Endereco();
-            endereco.setCep(jFormattedCep.getText());
-            endereco.setBairro(jTextBairro.getText());
-            endereco.setCidade(jTextCidade.getText());
-            endereco.setEndereco(jTextEndereco.getText());
-            endereco.setUf(jTextEstado.getText());
-            endereco.setNumero(jTextNumero.getText());
-            endereco.setComplemento(jTextComplemento.getText());
-            cliente.setEndereco(endereco);
+                Cliente cliente = new Cliente();
+                TipoCliente tpCliente = new TipoCliente();
+                cliente.setNome(jTextNome.getText());
+                cliente.setEmail(jTextEmail.getText());
+                cliente.setDataNascimento(dtNasc);
+                cliente.setTelefone(jTextTelefone.getText());
+                tpCliente.setIdTipoCliente(jCbTpCliente.getSelectedIndex() == 0 ? 1 : jCbTpCliente.getSelectedIndex());
+                cliente.setTipoCliente(tpCliente);
+                cliente.setCpfCnpj(jTextCpfCnpj.getText());
+                Endereco endereco = new Endereco();
+                endereco.setCep(jFormattedCep.getText());
+                endereco.setBairro(jTextBairro.getText());
+                endereco.setCidade(jTextCidade.getText());
+                endereco.setEndereco(jTextEndereco.getText());
+                endereco.setUf(jTextEstado.getText());
+                endereco.setNumero(jTextNumero.getText());
+                endereco.setComplemento(jTextComplemento.getText());
+                cliente.setEndereco(endereco);
         
-            ClienteDAL clienteDAL = new ClienteDAL();
-            if("Atualizar".equals(jButtonCadastrar.getText())){
-                cliente.setIdCliente(Integer.parseInt(jTextIdCliente.getText()));
-                clienteDAL.atualizarCliente(cliente);
+                ClienteDAL clienteDAL = new ClienteDAL();
+                if("Atualizar".equals(jButtonCadastrar.getText())){
+                    cliente.setIdCliente(Integer.parseInt(jTextIdCliente.getText()));
+                    clienteDAL.atualizarCliente(cliente);
                     JOptionPane.showMessageDialog(null,"Cliente atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     new Clientes().setVisible(true);
-            }
-            else{
-                if(clienteDAL.criarCliente(cliente)){
-                JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                new Clientes().setVisible(true);
-                setVisible(false);
+                    return;
                 }
-            }
+                
+                if(clienteDAL.criarCliente(cliente)){
+                    JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    new Clientes().setVisible(true);
+                    setVisible(false);
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Contate o administrador!","Atenção", JOptionPane.CANCEL_OPTION);
