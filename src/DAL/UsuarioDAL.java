@@ -56,7 +56,7 @@ public class UsuarioDAL extends Conexao {
             query.setString(2, usuario.getLogin());
             query.setString(3, usuario.getSenha());
             query.setString(4, usuario.getEmail());
-            query.setString(5, usuario.getTelefone());
+            query.setString(5, usuario.getTelefone().replace(" ","").replace("(", "").replace(")", "").replace("-", ""));
             query.setBoolean(6, usuario.getFlHabilitado());
             query.setInt(7, usuario.getTipoUsuario().getIdTipoUsuario());
             query.execute();

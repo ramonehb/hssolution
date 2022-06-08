@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import DAL.TipoProdutoDAL;
 import Entidades.TipoProduto;
 import java.awt.HeadlessException;
-import java.awt.Toolkit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -23,6 +18,8 @@ public class CadastroTipoProduto extends javax.swing.JFrame {
     public CadastroTipoProduto() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
     }
 
     /**

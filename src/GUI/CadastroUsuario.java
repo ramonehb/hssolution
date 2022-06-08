@@ -19,12 +19,16 @@ public final class CadastroUsuario extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         listaTipoUsuario();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         jTextIdUsuario.setVisible(false);
     }
     public CadastroUsuario(int idUsuario){
         initComponents();
         setLocationRelativeTo(null);
         listaTipoUsuario();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         carregaUsuario(idUsuario);
         jTextIdUsuario.setVisible(false);
         jButtonFinalizar.setText("Atualizar");
@@ -279,6 +283,7 @@ public final class CadastroUsuario extends javax.swing.JFrame {
                     if (usuarioDAL.criarUsuario(usuario)){
                         JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
                         setVisible(false);
+                        new Usuarios().setVisible(true);
                     }   
                 }
             }   
@@ -314,7 +319,7 @@ public final class CadastroUsuario extends javax.swing.JFrame {
             jTextTelefone.setText(u.getTelefone());
             jComboBoxTipoProduto.setSelectedIndex(u.getTipoUsuario().getIdTipoUsuario());
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+ex.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

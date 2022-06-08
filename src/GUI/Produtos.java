@@ -1,21 +1,23 @@
 package GUI;
 
-import DAL.UsuarioDAL;
-import Entidades.Usuario;
+import DAL.ProdutoDAL;
+import Entidades.Produto;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Humberto Ramone
  */
-public class Usuarios extends javax.swing.JFrame {
+public class Produtos extends javax.swing.JFrame {
 
     /**
      * Creates new form Usuarios
      */
-    public Usuarios() {
+    public Produtos() {
         initComponents();
-        carregaTabelaUsuarios();
+        carregaTabelaProdutos();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -30,26 +32,13 @@ public class Usuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableUsuarios = new javax.swing.JTable();
         jButtonAtualizar = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
         jButtonCriar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProdutos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "IdUsuario", "Login", "E-mail", "Tipo do usuário", "Habilitado"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableUsuarios);
 
         jButtonAtualizar.setText("Atualizar");
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,14 +61,23 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
+        jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "IdProduto", "Nome", "Tipo Produto", "Valor pago", "Valor de venda", "Quantidade"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProdutos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(jButtonCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,6 +86,10 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addComponent(jButtonDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,24 +108,24 @@ public class Usuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        int idUsuario = jTableUsuarios.getSelectedRow();
-        new CadastroUsuario(idUsuario).setVisible(true); 
+        int idProduto = jTableProdutos.getSelectedRow();
+        new CadastroProduto(idProduto).setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
-        int index = jTableUsuarios.getSelectedRow();
+        int index = jTableProdutos.getSelectedRow();
         try {
-            UsuarioDAL dal = new UsuarioDAL();
-            Usuario usuario = dal.listarUsuarios().get(index);
-            dal.deletarUsuario(usuario.getIdUsuario());
-            carregaTabelaUsuarios();
+            ProdutoDAL dal = new ProdutoDAL();
+            Produto produto = dal.listarProdutos().get(index);
+            dal.deletarProduto(produto.getIdProduto());
+            carregaTabelaProdutos();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
-        new CadastroUsuario().setVisible(true);
+        new CadastroProduto().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed
 
@@ -144,47 +146,51 @@ public class Usuarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Usuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Usuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Usuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Usuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Usuarios().setVisible(true);
+                new Produtos().setVisible(true);
             }
         });
     }
     
-    private void carregaTabelaUsuarios(){
-        DefaultTableModel modelo = (DefaultTableModel) jTableUsuarios.getModel();
+     private void carregaTabelaProdutos(){
+        DefaultTableModel modelo = (DefaultTableModel) jTableProdutos.getModel();
         modelo.setNumRows(0);
         
-        jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jTableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(150);
-        jTableUsuarios.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableProdutos.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTableProdutos.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(30);
         
         try {
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            ProdutoDAL produtoDAL = new ProdutoDAL();
         
-        for (Usuario u : usuarioDAL.listarUsuarios()){
+        for (Produto p : produtoDAL.listarProdutos()){
             modelo.addRow(new Object[]{
-                u.getIdUsuario(),
-                u.getLogin(),
-                u.getEmail(),
-                u.getTipoUsuario().getIdTipoUsuario() == 1 ? "Administrador" : "Atendente",
-                u.getFlHabilitado() ? "Habilitado" : "Desativado"
+                p.getIdProduto(),
+                p.getNome(),
+                p.getTipoProduto().getNome(),
+                p.getVL_Pago(),
+                p.getVL_Venda(),
+                p.getQuantidade()
             });
         }
-        } catch (Exception e) {
-            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -194,6 +200,6 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCriar;
     private javax.swing.JButton jButtonDeletar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableUsuarios;
+    private javax.swing.JTable jTableProdutos;
     // End of variables declaration//GEN-END:variables
 }
