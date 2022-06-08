@@ -4,6 +4,8 @@ import DAL.ClienteDAL;
 import DAL.UsuarioDAL;
 import Entidades.Cliente;
 import Entidades.Usuario;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,8 +19,10 @@ public class Clientes extends javax.swing.JFrame {
      */
     public Clientes() {
         initComponents();
-        carregaTabelaUsuarios();
+        carregaTabelaClientes();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
     }
 
     /**
@@ -35,8 +39,6 @@ public class Clientes extends javax.swing.JFrame {
         jButtonAtualizar = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
         jButtonCriar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTableClientes.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -111,18 +113,30 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         int idCliente = jTableClientes.getSelectedRow();
+        
+        if(idCliente < 0){
+            JOptionPane.showMessageDialog(null,"Selecione o cliente para conseguir atualizar! ","Atenção", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         new CadastroCliente(idCliente).setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         int index = jTableClientes.getSelectedRow();
+        
+        if(index < 0){
+            JOptionPane.showMessageDialog(null,"Selecione o cliente para conseguir deletar! ","Atenção", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
         try {
-            UsuarioDAL dal = new UsuarioDAL();
-            Usuario usuario = dal.listarUsuarios().get(index);
-            dal.deletarUsuario(usuario.getIdUsuario());
-            carregaTabelaUsuarios();
+            ClienteDAL dal = new ClienteDAL();
+            Cliente cliente = dal.listarClientes().get(index);
+            dal.deletarCliente(cliente.getIdCliente());
+            carregaTabelaClientes();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
@@ -166,7 +180,7 @@ public class Clientes extends javax.swing.JFrame {
         });
     }
     
-    private void carregaTabelaUsuarios(){
+    private void carregaTabelaClientes(){
         DefaultTableModel modelo = (DefaultTableModel) jTableClientes.getModel();
         modelo.setNumRows(0);
         
@@ -187,7 +201,7 @@ public class Clientes extends javax.swing.JFrame {
             });
         }
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

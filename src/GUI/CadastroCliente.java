@@ -329,17 +329,20 @@ public final class CadastroCliente extends javax.swing.JFrame {
             jTextIdCliente.setText(Integer.toString(c.getIdCliente()));
             jTextNome.setText(c.getNome());
             jTextEmail.setText(c.getEmail());
-            jTextDataNascimento.setText(c.getDataNascimento().toString());
+            jTextDataNascimento.setValue(c.getDataNascimento());
             jTextTelefone.setText(c.getTelefone());
             jCbTpCliente.setSelectedIndex(c.getTipoCliente().getIdTipoCliente());
             jTextCpfCnpj.setText(c.getCpfCnpj());
             jFormattedCep.setText(c.getEndereco().getCep());
             jTextEndereco.setText(c.getEndereco().getEndereco());
+            jTextCidade.setText(c.getEndereco().getCidade());
             jTextBairro.setText(c.getEndereco().getBairro());
             jTextEstado.setText(c.getEndereco().getUf());
             jTextNumero.setText(Integer.toString(c.getEndereco().getNumero()));
+            jTextComplemento.setText(c.getEndereco().getComplemento());
             
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -461,6 +464,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
                 jCbTpCliente.addItem(res.getString(2));
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Contate o administrador\nErro: "+e.getMessage(),"Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

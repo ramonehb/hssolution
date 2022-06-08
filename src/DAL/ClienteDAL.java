@@ -51,7 +51,7 @@ public class ClienteDAL extends Conexao{
     public void atualizarCliente(Cliente cliente) throws SQLException {
         try {
             conn = Conexao.abreConexao();
-            query = (PreparedStatement) conn.prepareStatement("Update Cliente Set Nome = ?, Email = ?, DT_Nasc = ?, Telefone = ?, ID_TipoCliente = ?, CpfCnpj = ?, Cep = ?, Endereco = ?, Bairro = ?, Uf = ?, Numero = ?, Complemento = ? Where ID_Cliente = ?");
+            query = (PreparedStatement) conn.prepareStatement("Update Cliente Set Nome = ?, Email = ?, DT_Nasc = ?, Telefone = ?, ID_TipoCliente = ?, CpfCnpj = ?, Cep = ?, Endereco = ?, Bairro = ?, Uf = ?, Numero = ?, Complemento = ?, Cidade = ? Where ID_Cliente = ?");
             
             query.setString(1, cliente.getNome());
             query.setString(2, cliente.getEmail());
@@ -65,12 +65,29 @@ public class ClienteDAL extends Conexao{
             query.setString(10, cliente.getEndereco().getUf());
             query.setInt(11, cliente.getEndereco().getNumero());
             query.setString(12, cliente.getEndereco().getComplemento());
-            query.setInt(13, cliente.getIdCliente());
+            query.setString(13, cliente.getEndereco().getCidade());
+            query.setInt(14, cliente.getIdCliente());
             query.execute();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    public boolean deletarCliente(int idCliente) throws SQLException {
+        boolean sucesso;
+        try {
+            conn = Conexao.abreConexao();
+            query = conn.prepareStatement("Delete From Cliente Where ID_Cliente = ?");
+            query.setInt(1, idCliente);
+            query.execute();
+            sucesso = true;
+        }catch (SQLException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+           sucesso = false;
+        }
+        
+        return sucesso;
     }
     
     public ResultSet listaTipoCliente(){
@@ -103,6 +120,7 @@ public class ClienteDAL extends Conexao{
                 c.setDataNascimento(res.getDate("DT_Nasc"));
                 c.setTelefone(res.getString("Telefone"));
                 t.setIdTipoCliente(res.getInt("ID_TipoCliente"));
+                c.setTipoCliente(t);
                 c.setCpfCnpj(res.getString("CpfCnpj"));
                 e.setCep(res.getString("CEP"));
                 e.setEndereco(res.getString("Endereco"));
@@ -110,6 +128,8 @@ public class ClienteDAL extends Conexao{
                 e.setUf(res.getString("Uf"));
                 e.setNumero(res.getInt("Numero"));
                 e.setComplemento(res.getString("Complemento"));
+                e.setCidade(res.getString("Cidade"));
+                c.setEndereco(e);
                 clientes.add(c);
             }
         } catch (Exception e) {
