@@ -35,7 +35,7 @@ public class ClienteDAL extends Conexao{
             query.setString(9, cliente.getEndereco().getCidade());
             query.setString(10, cliente.getEndereco().getBairro());
             query.setString(11, cliente.getEndereco().getUf());
-            query.setInt(12, cliente.getEndereco().getNumero());
+            query.setString(12, cliente.getEndereco().getNumero());
             query.setString(13, cliente.getEndereco().getComplemento());
             query.execute();
             
@@ -63,7 +63,7 @@ public class ClienteDAL extends Conexao{
             query.setString(8, cliente.getEndereco().getEndereco());
             query.setString(9, cliente.getEndereco().getBairro());
             query.setString(10, cliente.getEndereco().getUf());
-            query.setInt(11, cliente.getEndereco().getNumero());
+            query.setString(11, cliente.getEndereco().getNumero());
             query.setString(12, cliente.getEndereco().getComplemento());
             query.setString(13, cliente.getEndereco().getCidade());
             query.setInt(14, cliente.getIdCliente());
@@ -126,7 +126,7 @@ public class ClienteDAL extends Conexao{
                 e.setEndereco(res.getString("Endereco"));
                 e.setBairro(res.getString("Bairro"));
                 e.setUf(res.getString("Uf"));
-                e.setNumero(res.getInt("Numero"));
+                e.setNumero(res.getString("Numero"));
                 e.setComplemento(res.getString("Complemento"));
                 e.setCidade(res.getString("Cidade"));
                 c.setEndereco(e);

@@ -25,6 +25,8 @@ public final class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         listaTipoCliente();
         jTextIdCliente.setVisible(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
     }
     
     public CadastroCliente(int idCliente){
@@ -338,7 +340,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
             jTextCidade.setText(c.getEndereco().getCidade());
             jTextBairro.setText(c.getEndereco().getBairro());
             jTextEstado.setText(c.getEndereco().getUf());
-            jTextNumero.setText(Integer.toString(c.getEndereco().getNumero()));
+            jTextNumero.setText(c.getEndereco().getNumero());
             jTextComplemento.setText(c.getEndereco().getComplemento());
             
         } catch (Exception e) {
@@ -389,7 +391,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
             if(retorno){
             SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
             Date dtNasc = dt.parse(jTextDataNascimento.getText());
-            
+
             Cliente cliente = new Cliente();
             TipoCliente tpCliente = new TipoCliente();
             cliente.setNome(jTextNome.getText());
@@ -405,7 +407,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
             endereco.setCidade(jTextCidade.getText());
             endereco.setEndereco(jTextEndereco.getText());
             endereco.setUf(jTextEstado.getText());
-            endereco.setNumero(Integer.parseInt(jTextNumero.getText()));
+            endereco.setNumero(jTextNumero.getText());
             endereco.setComplemento(jTextComplemento.getText());
             cliente.setEndereco(endereco);
         
@@ -420,6 +422,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
             else{
                 if(clienteDAL.criarCliente(cliente)){
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                new Clientes().setVisible(true);
                 setVisible(false);
                 }
             }
@@ -501,6 +504,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
                 new CadastroCliente().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

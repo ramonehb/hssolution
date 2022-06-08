@@ -11,7 +11,7 @@ public class Endereco {
     private String localidade;
     private String uf;
     private String Complemento;
-    private int Numero;
+    private String Numero;
 
      public String getCep(){
         return this.Cep;
@@ -61,11 +61,11 @@ public class Endereco {
         this.Complemento = complemento;
     }
     
-    public int getNumero(){
+    public String getNumero(){
         return this.Numero;
     }
     
-    public void setNumero(int numero){
+    public void setNumero(String numero){
         this.Numero = numero;
     }
     

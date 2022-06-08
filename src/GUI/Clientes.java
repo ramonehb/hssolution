@@ -3,6 +3,7 @@ package GUI;
 import DAL.ClienteDAL;
 import DAL.UsuarioDAL;
 import Entidades.Cliente;
+import Entidades.Sessao.Session;
 import Entidades.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -118,15 +119,26 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Selecione o cliente para conseguir atualizar! ","Atenção", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        new CadastroCliente(idCliente).setVisible(true); 
+        
+        if(Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null, "Somente administradores.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        new CadastroCliente(idCliente).setVisible(true);
+        setVisible(false);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         int index = jTableClientes.getSelectedRow();
-        
         if(index < 0){
             JOptionPane.showMessageDialog(null,"Selecione o cliente para conseguir deletar! ","Atenção", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        if(Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null, "Somente administradores.", "Atenção", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -141,7 +153,13 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
+        
+        if(Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null, "Somente administradores.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         new CadastroCliente().setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed
 
     /**
