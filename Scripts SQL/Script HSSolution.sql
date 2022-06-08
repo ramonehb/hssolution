@@ -55,7 +55,7 @@ Create Table Cliente (
     ,Bairro         Varchar(50)
     ,Cidade         Varchar(50)
     ,Uf             Varchar(2)
-    ,Numero         Int
+    ,Numero         Varchar(20)
     ,Complemento    Varchar(50)
     
     ,Primary Key (ID_Cliente)
