@@ -2,6 +2,7 @@ package GUI;
 
 import DAL.ProdutoDAL;
 import Entidades.Produto;
+import Entidades.Sessao;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -108,12 +109,22 @@ public class Produtos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int idProduto = jTableProdutos.getSelectedRow();
         new CadastroProduto(idProduto).setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int index = jTableProdutos.getSelectedRow();
         try {
             ProdutoDAL dal = new ProdutoDAL();
@@ -125,6 +136,10 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         new CadastroProduto().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed
@@ -169,8 +184,8 @@ public class Produtos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTableProdutos.getModel();
         modelo.setNumRows(0);
         
-        jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTableProdutos.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableProdutos.getColumnModel().getColumn(2).setPreferredWidth(50);
         jTableProdutos.getColumnModel().getColumn(3).setPreferredWidth(50);
         jTableProdutos.getColumnModel().getColumn(0).setPreferredWidth(50);

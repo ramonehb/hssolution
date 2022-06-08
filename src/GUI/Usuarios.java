@@ -1,7 +1,9 @@
 package GUI;
 
 import DAL.UsuarioDAL;
+import Entidades.Sessao;
 import Entidades.Usuario;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -106,12 +108,22 @@ public class Usuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int idUsuario = jTableUsuarios.getSelectedRow();
         new CadastroUsuario(idUsuario).setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int index = jTableUsuarios.getSelectedRow();
         try {
             UsuarioDAL dal = new UsuarioDAL();
@@ -123,6 +135,10 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
+        if (Sessao.Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         new CadastroUsuario().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed

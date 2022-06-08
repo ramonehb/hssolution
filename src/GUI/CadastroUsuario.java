@@ -283,7 +283,6 @@ public final class CadastroUsuario extends javax.swing.JFrame {
                     if (usuarioDAL.criarUsuario(usuario)){
                         JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
                         setVisible(false);
-                        new Usuarios().setVisible(true);
                     }   
                 }
             }   
