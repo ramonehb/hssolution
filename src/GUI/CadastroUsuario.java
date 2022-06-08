@@ -276,14 +276,18 @@ public final class CadastroUsuario extends javax.swing.JFrame {
                 if ("Atualizar".equals(jButtonFinalizar.getText())){
                     usuario.setIdUsuario(Integer.parseInt(jTextIdUsuario.getText()));
                     usuarioDAL.atualizarUsuario(usuario);
-                        JOptionPane.showMessageDialog(null,"Usuário atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                        setVisible(false);
-                        new Usuarios().setVisible(true);
-                }else {
-                    if (usuarioDAL.criarUsuario(usuario)){
-                        JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
-                        setVisible(false);
-                    }   
+                    JOptionPane.showMessageDialog(null,"Usuário atualizado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new Usuarios().setVisible(true);
+                    return;
+                }
+                
+                if (usuarioDAL.criarUsuario(usuario)){
+                    JOptionPane.showMessageDialog(null,"Usuário cadastrado","Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                }
+                else {
+                        JOptionPane.showMessageDialog(null,"Usuário não cadastrado","Atenção", JOptionPane.ERROR_MESSAGE);
                 }
             }   
        }catch (HeadlessException | SQLException e){
@@ -354,7 +358,7 @@ public final class CadastroUsuario extends javax.swing.JFrame {
             mensagem += "As senhas são diferentes.\n";
             erro++;
         }
-        if (jComboBoxTipoProduto.getSelectedItem().toString() == "Selecione"){
+        if ("Selecione".equals(jComboBoxTipoProduto.getSelectedItem().toString())){
             mensagem += "Selecione o tipo do usuário.\n";
             erro++;
         }
