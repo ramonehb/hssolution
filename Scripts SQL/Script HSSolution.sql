@@ -138,6 +138,8 @@ Create Table ItemPedido
 
 Select P.ID_Pedido,C.Nome,FP.Descricao,PS.Descricao,P.DT_Venda,PR.Nome,IP.Quantidade,IP.SubTotal From Pedido As P Inner Join Cliente As C On P.ID_Cliente = C.ID_Cliente Inner Join ItemPedido As IP On P.ID_Pedido = IP.ID_Pedido	Inner Join Produto as PR On IP.ID_Produto = PR.ID_Produto Inner Join FormaPagamento As FP On P.ID_FormaPagamento = FP.ID_FormaPagamento	Inner Join PedidoStatus As PS On PS.ID_PedidoStatus = P.ID_PedidoStatus	Where P.DT_Venda >= '2019-02-01' && P.DT_Venda <= '2022-12-31' Order By P.ID_Pedido
 
+Create View Relatorio 
+As
 Select   P.ID_Pedido             As 'Numero Pedido'
 	,C.Nome                  As 'Nome Cliente'
         ,FP.Descricao
