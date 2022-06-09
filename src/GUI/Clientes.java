@@ -167,11 +167,6 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
-        
-        if(Session.ID_TipoUsuario == 2){
-            JOptionPane.showMessageDialog(null, "Somente administradores.", "Atenção", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         new CadastroCliente().setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed

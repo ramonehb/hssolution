@@ -1,7 +1,6 @@
 package DAL;
 
 import Entidades.TipoProduto;
-import Entidades.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +26,7 @@ public class TipoProdutoDAL {
             sucesso = true;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
         }
         

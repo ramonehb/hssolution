@@ -167,10 +167,6 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriarActionPerformed
-        if (Sessao.Session.ID_TipoUsuario == 2){
-            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         new CadastroProduto().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed

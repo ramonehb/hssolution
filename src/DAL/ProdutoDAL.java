@@ -33,7 +33,7 @@ public class ProdutoDAL {
             sucesso = true;
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
             sucesso = false;
         }
         
@@ -46,7 +46,7 @@ public class ProdutoDAL {
             query = conn.prepareStatement("Select * From TipoProduto");
             return query.executeQuery();
         }catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
            return null;
         }
     }
@@ -75,7 +75,7 @@ public class ProdutoDAL {
                 produtos.add(p);
             }            
         } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
         }
         
         return produtos;
@@ -90,7 +90,7 @@ public class ProdutoDAL {
             query.execute();
             sucesso = true;
         }catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
            sucesso = false;
         }
         
@@ -110,7 +110,7 @@ public class ProdutoDAL {
             query.execute();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

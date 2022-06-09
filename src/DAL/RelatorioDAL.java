@@ -44,7 +44,7 @@ public class RelatorioDAL {
                 relatorios.add(r);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
         }
         
         return relatorios;
@@ -74,7 +74,7 @@ public class RelatorioDAL {
                 relatorios.add(r);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o adminsitrador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Contate o administrador", JOptionPane.INFORMATION_MESSAGE);
         }
         
         return relatorios;

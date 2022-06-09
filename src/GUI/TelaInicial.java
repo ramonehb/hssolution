@@ -246,6 +246,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        if (Session.ID_TipoUsuario == 2){
+            JOptionPane.showMessageDialog(null,"Somente administradores.","Atenção", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         new GerarRelatorio().setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
