@@ -136,15 +136,28 @@ Create Table ItemPedido
 	,Constraint FK_ID_Produto    Foreign Key(ID_Produto) References Produto (ID_Produto)
 )
 
---Visão da tela de produto
-Select   P.ID_Produto
-        ,P.Nome
-        ,TP.Categoria
-        ,P.VL_Pago
-        ,P.VL_Venda
-        ,P.Quantidade
-	From Produto As P
-    Inner Join TipoProduto as TP
-        On P.ID_TipoProduto = TP.ID_TipoProduto
+Select P.ID_Pedido,C.Nome,FP.Descricao,PS.Descricao,P.DT_Venda,PR.Nome,IP.Quantidade,IP.SubTotal From Pedido As P Inner Join Cliente As C On P.ID_Cliente = C.ID_Cliente Inner Join ItemPedido As IP On P.ID_Pedido = IP.ID_Pedido	Inner Join Produto as PR On IP.ID_Produto = PR.ID_Produto Inner Join FormaPagamento As FP On P.ID_FormaPagamento = FP.ID_FormaPagamento	Inner Join PedidoStatus As PS On PS.ID_PedidoStatus = P.ID_PedidoStatus	Where P.DT_Venda >= '2019-02-01' && P.DT_Venda <= '2022-12-31' Order By P.ID_Pedido
+
+Select   P.ID_Pedido             As 'Numero Pedido'
+	,C.Nome                  As 'Nome Cliente'
+        ,FP.Descricao
+        ,PS.Descricao
+        ,P.DT_Venda
+        ,PR.Nome 		As 'Nome Produto' 
+        ,IP.Quantidade
+        ,IP.SubTotal            As Total
+	From Pedido As P
+        Inner Join Cliente As C
+		On P.ID_Cliente = C.ID_Cliente
+	Inner Join ItemPedido As IP
+		On P.ID_Pedido = IP.ID_Pedido
+	Inner Join Produto as PR
+		On IP.ID_Produto = PR.ID_Produto
+	Inner Join FormaPagamento As FP
+		On P.ID_FormaPagamento = FP.ID_FormaPagamento
+	Inner Join PedidoStatus As PS
+		On PS.ID_PedidoStatus = P.ID_PedidoStatus
+	Where P.DT_Venda >= '2019-02-01' && P.DT_Venda <= '2022-12-31'
+    Order By P.ID_Pedido
 
     

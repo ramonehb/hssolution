@@ -44,6 +44,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -136,6 +137,15 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu5.setText("Relatórios");
+
+        jMenuItem11.setText("Relatorio de vendas por período");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem11);
+
         jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Sair");
@@ -235,6 +245,10 @@ public class TelaInicial extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"Em desenvolvimento.","Atenção", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        new GerarRelatorio().setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,6 +294,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
