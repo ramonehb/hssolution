@@ -22,6 +22,8 @@ public class Produtos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        jTableProdutos.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     /**

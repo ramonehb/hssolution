@@ -21,6 +21,8 @@ public class Clientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        jTableClientes.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableClientes.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     /**
@@ -37,6 +39,7 @@ public class Clientes extends javax.swing.JFrame {
         jButtonAtualizar = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
         jButtonCriar = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
 
         jTableClientes.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -76,6 +79,16 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
+        jButtonFechar.setBackground(new java.awt.Color(255, 0, 51));
+        jButtonFechar.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jButtonFechar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonFechar.setText("X");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,11 +105,15 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addComponent(jButtonDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonFechar))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jButtonFechar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,6 +175,10 @@ public class Clientes extends javax.swing.JFrame {
         new CadastroCliente().setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButtonCriarActionPerformed
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +246,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonCriar;
     private javax.swing.JButton jButtonDeletar;
+    private javax.swing.JButton jButtonFechar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableClientes;
     // End of variables declaration//GEN-END:variables
