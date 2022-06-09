@@ -1,17 +1,14 @@
 package GUI;
 
 import DAL.ClienteDAL;
-import DAL.UsuarioDAL;
 import Entidades.Cliente;
 import Entidades.Sessao.Session;
-import Entidades.Usuario;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 55119
+ * @author Samuel Carvalho
  */
 public class Clientes extends javax.swing.JFrame {
 

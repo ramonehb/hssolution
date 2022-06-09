@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 55119
+ * @author Humberto Ramone
  */
 public class GerarRelatorio extends javax.swing.JFrame {
 

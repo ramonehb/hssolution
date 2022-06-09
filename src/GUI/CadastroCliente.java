@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author SAMUEL
+ * @author Samuel Carvalho
  */
 public final class CadastroCliente extends javax.swing.JFrame {
 
